@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "make:item/remote_connector"
+    "layer0": "wheat-mix:item/remote_connector"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "make:item/fish_puffer"
+    "layer0": "wheat-mix:item/fish_puffer"
   }
 }

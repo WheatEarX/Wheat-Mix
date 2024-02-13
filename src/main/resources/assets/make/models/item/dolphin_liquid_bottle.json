@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "make:item/dolphin_liquid_bottle"
+    "layer0": "wheat-mix:item/dolphin_liquid_bottle"
   }
 }

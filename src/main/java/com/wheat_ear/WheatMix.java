@@ -9,9 +9,9 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Make implements ModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("make");
-    public static final String MOD_ID = "make";
+public class WheatMix implements ModInitializer {
+    public static final Logger LOGGER = LoggerFactory.getLogger("wheat-mix");
+    public static final String MOD_ID = "wheat-mix";
 
     private static void registerCommands() {
     }

@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "make",
+	"id": "wheat-mix",
 	"version": "0.6.1",
 	"name": "Make",
 	"description": "Something made by Wheat_ear. Just for fun. ",
@@ -16,11 +16,11 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.wheat_ear.Make"
+			"com.wheat_ear.WheatMix"
 		]
 	},
 	"mixins": [
-		"make.mixins.json"
+		"wheat-mix.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.3",

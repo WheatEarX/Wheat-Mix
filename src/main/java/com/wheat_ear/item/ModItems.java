@@ -1,6 +1,6 @@
 package com.wheat_ear.item;
 
-import com.wheat_ear.Make;
+import com.wheat_ear.WheatMix;
 import com.wheat_ear.others.ModFoodComponents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.*;
@@ -12,16 +12,16 @@ import net.minecraft.util.Rarity;
 
 public class ModItems {
     public static final Item FISH_PUFFER = Registry.register(Registries.ITEM,
-            new Identifier(Make.MOD_ID, "fish_puffer"),
+            new Identifier(WheatMix.MOD_ID, "fish_puffer"),
             new Item(new Item.Settings().food(FoodComponents.PUFFERFISH)));
     public static final Item REDDEN_APPLE = Registry.register(Registries.ITEM,
-            new Identifier(Make.MOD_ID, "redden_apple"),
+            new Identifier(WheatMix.MOD_ID, "redden_apple"),
             new Item(new Item.Settings().food(ModFoodComponents.REDDEN_APPLE).rarity(Rarity.UNCOMMON)));
     public static final Item DOLPHIN_LIQUID_BOTTLE = Registry.register(Registries.ITEM,
-            new Identifier(Make.MOD_ID, "dolphin_liquid_bottle"),
+            new Identifier(WheatMix.MOD_ID, "dolphin_liquid_bottle"),
             new DolphinLiquidItem(new Item.Settings().maxCount(1)));
     public static final Item REMOTE_CONNECTOR = Registry.register(Registries.ITEM,
-            new Identifier(Make.MOD_ID, "remote_connector"),
+            new Identifier(WheatMix.MOD_ID, "remote_connector"),
             new RemoteConnectorItem(new Item.Settings().maxCount(1)));
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
