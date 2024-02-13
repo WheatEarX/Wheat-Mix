@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "com.wheat_ear.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BrewingRecipeMixin",
+    "EnchantmentMixin",
+    "GlassBottleItemMixin",
+    "LivingEntityMiscMixin",
+    "gravityCancellation.BoatItemMixin",
+    "gravityCancellation.BowItemMixin",
+    "gravityCancellation.CrossBowItemMixin",
+    "gravityCancellation.EggItemMixin",
+    "gravityCancellation.EnderEyeItemMixin",
+    "gravityCancellation.EnderPearlItemMixin",
+    "gravityCancellation.EntityMixin",
+    "gravityCancellation.EntityTypeMixin",
+    "gravityCancellation.ExperienceBottleItemMixin",
+    "gravityCancellation.ItemEntityMixin",
+    "gravityCancellation.SnowballItemMixin",
+    "gravityCancellation.ThrowablePotionItemMixin",
+    "gravityCancellation.TridentItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}
