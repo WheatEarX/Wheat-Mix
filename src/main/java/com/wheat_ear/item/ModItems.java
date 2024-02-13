@@ -20,12 +20,13 @@ public class ModItems {
     public static final Item DOLPHIN_LIQUID_BOTTLE = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "dolphin_liquid_bottle"),
             new DolphinLiquidItem(new Item.Settings().maxCount(1)));
+    @SuppressWarnings("unused")
     public static final Item REMOTE_CONNECTOR = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "remote_connector"),
             new RemoteConnectorItem(new Item.Settings().maxCount(1)));
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
-            .displayName(Text.translatable("itemGroup.make.weNeed"))
+            .displayName(Text.translatable("itemGroup.wheat-mix.weNeed"))
             .entries((context, entries) -> {
                 entries.add(FISH_PUFFER);
                 entries.add(REDDEN_APPLE);

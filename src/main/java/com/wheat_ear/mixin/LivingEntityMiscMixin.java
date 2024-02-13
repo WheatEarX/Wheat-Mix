@@ -1,14 +1,10 @@
 package com.wheat_ear.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import com.wheat_ear.effect.ModEffects;
 import com.wheat_ear.enchantment.ModEnchantments;
 import com.wheat_ear.others.ModUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,13 +13,17 @@ import net.minecraft.entity.projectile.*;
 import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.entity.projectile.thrown.ExperienceBottleEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -71,6 +71,40 @@ public abstract class LivingEntityMiscMixin extends Entity {
 
     @Shadow
     public abstract void setStackInHand(Hand hand, ItemStack stack);
+
+    @Shadow
+    protected abstract float getBaseMovementSpeedMultiplier();
+
+    @Shadow
+    protected abstract boolean shouldSwimInFluids();
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    @Shadow
+    public abstract boolean canWalkOnFluid(FluidState state);
+
+    @Shadow
+    public abstract float getMovementSpeed();
+
+    @Shadow
+    public abstract boolean isClimbing();
+
+    @Shadow
+    public abstract Vec3d applyFluidMovingSpeed(double gravity, boolean falling, Vec3d motion);
+
+    @Shadow
+    public abstract boolean isFallFlying();
+
+    @Shadow
+    protected abstract SoundEvent getFallSound(int distance);
+
+    @Shadow
+    public abstract Vec3d applyMovementInput(Vec3d movementInput, float slipperiness);
+
+    @Shadow
+    public abstract boolean hasNoDrag();
+
+    @Shadow
+    public abstract void updateLimbs(boolean flutter);
 
     @Inject(method = "jump", at = @At("RETURN"))
     public void jump(CallbackInfo ci) {
@@ -221,17 +255,153 @@ public abstract class LivingEntityMiscMixin extends Entity {
         }
     }
 
-    @Inject(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getFluidState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/FluidState;", shift = At.Shift.AFTER))
-    protected void travel1(Vec3d movementInput, CallbackInfo ci, @Local double d) {
-        if (this.getVelocity().y <= 0.0 && this.hasStatusEffect(ModEffects.QUICK_FALLING)) {
-            d += (this.getStatusEffect(ModEffects.QUICK_FALLING).getAmplifier() + 1) * 0.06;
-        }
-    }
+    /**
+     * @author Wheat_ear
+     * @reason The only way to do that. Do not worry.
+     */
+    @SuppressWarnings("deprecation")
+    @Overwrite
+    public void travel(Vec3d movementInput) {
+        if (this.isLogicalSideForUpdatingMovement()) {
+            double d = 0.08;
+            boolean bl = this.getVelocity().y <= 0.0;
+            if (bl && this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
+                d = 0.01;
+            }
+            if (bl && this.hasStatusEffect(ModEffects.QUICK_FALLING)) {
+                d += (this.getStatusEffect(ModEffects.QUICK_FALLING).getAmplifier() + 1) * 0.06;
+            }
 
-    @Inject(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isTouchingWater()Z"))
-    protected void travel2(Vec3d movementInput, CallbackInfo ci, @Local double f) {
-        if (this.hasStatusEffect(ModEffects.SLOW_SWIMMING)) {
-            f -= (this.getStatusEffect(ModEffects.SLOW_SWIMMING).getAmplifier() + 1) * 0.05F;
+            FluidState fluidState = this.getWorld().getFluidState(this.getBlockPos());
+            float f;
+            double e;
+            if (this.isTouchingWater() && this.shouldSwimInFluids() && !this.canWalkOnFluid(fluidState)) {
+                e = this.getY();
+                f = this.isSprinting() ? 0.9F : this.getBaseMovementSpeedMultiplier();
+                float g = 0.02F;
+                float h = (float) EnchantmentHelper.getDepthStrider((LivingEntity) (Entity) this);
+                if (h > 3.0F) {
+                    h = 3.0F;
+                }
+
+                if (!this.isOnGround()) {
+                    h *= 0.5F;
+                }
+
+                if (h > 0.0F) {
+                    f += (0.54600006F - f) * h / 3.0F;
+                    g += (this.getMovementSpeed() - g) * h / 3.0F;
+                }
+
+                if (this.hasStatusEffect(StatusEffects.DOLPHINS_GRACE)) {
+                    f = 0.96F;
+                }
+
+                if (this.hasStatusEffect(ModEffects.SLOW_SWIMMING)) {
+                    f -= (this.getStatusEffect(ModEffects.SLOW_SWIMMING).getAmplifier() + 1) * 0.05F;
+                }
+
+                this.updateVelocity(g, movementInput);
+                this.move(MovementType.SELF, this.getVelocity());
+                Vec3d vec3d = this.getVelocity();
+                if (this.horizontalCollision && this.isClimbing()) {
+                    vec3d = new Vec3d(vec3d.x, 0.2, vec3d.z);
+                }
+
+                this.setVelocity(vec3d.multiply(f, 0.800000011920929, f));
+                Vec3d vec3d2 = this.applyFluidMovingSpeed(d, bl, this.getVelocity());
+                this.setVelocity(vec3d2);
+                if (this.horizontalCollision && this.doesNotCollide(vec3d2.x, vec3d2.y + 0.6000000238418579 - this.getY() + e, vec3d2.z)) {
+                    this.setVelocity(vec3d2.x, 0.30000001192092896, vec3d2.z);
+                }
+            } else if (this.isInLava() && this.shouldSwimInFluids() && !this.canWalkOnFluid(fluidState)) {
+                e = this.getY();
+                this.updateVelocity(0.02F, movementInput);
+                this.move(MovementType.SELF, this.getVelocity());
+                Vec3d vec3d3;
+                if (this.getFluidHeight(FluidTags.LAVA) <= this.getSwimHeight()) {
+                    this.setVelocity(this.getVelocity().multiply(0.5, 0.800000011920929, 0.5));
+                    vec3d3 = this.applyFluidMovingSpeed(d, bl, this.getVelocity());
+                    this.setVelocity(vec3d3);
+                } else {
+                    this.setVelocity(this.getVelocity().multiply(0.5));
+                }
+
+                if (!this.hasNoGravity()) {
+                    this.setVelocity(this.getVelocity().add(0.0, -d / 4.0, 0.0));
+                }
+
+                vec3d3 = this.getVelocity();
+                if (this.horizontalCollision && this.doesNotCollide(vec3d3.x, vec3d3.y + 0.6000000238418579 - this.getY() + e, vec3d3.z)) {
+                    this.setVelocity(vec3d3.x, 0.30000001192092896, vec3d3.z);
+                }
+            } else if (this.isFallFlying()) {
+                this.limitFallDistance();
+                Vec3d vec3d4 = this.getVelocity();
+                Vec3d vec3d5 = this.getRotationVector();
+                f = this.getPitch() * 0.017453292F;
+                double i = Math.sqrt(vec3d5.x * vec3d5.x + vec3d5.z * vec3d5.z);
+                double j = vec3d4.horizontalLength();
+                double k = vec3d5.length();
+                double l = Math.cos(f);
+                l = l * l * Math.min(1.0, k / 0.4);
+                vec3d4 = this.getVelocity().add(0.0, d * (-1.0 + l * 0.75), 0.0);
+                double m;
+                if (vec3d4.y < 0.0 && i > 0.0) {
+                    m = vec3d4.y * -0.1 * l;
+                    vec3d4 = vec3d4.add(vec3d5.x * m / i, m, vec3d5.z * m / i);
+                }
+
+                if (f < 0.0F && i > 0.0) {
+                    m = j * (double) (-MathHelper.sin(f)) * 0.04;
+                    vec3d4 = vec3d4.add(-vec3d5.x * m / i, m * 3.2, -vec3d5.z * m / i);
+                }
+
+                if (i > 0.0) {
+                    vec3d4 = vec3d4.add((vec3d5.x / i * j - vec3d4.x) * 0.1, 0.0, (vec3d5.z / i * j - vec3d4.z) * 0.1);
+                }
+
+                this.setVelocity(vec3d4.multiply(0.9900000095367432, 0.9800000190734863, 0.9900000095367432));
+                this.move(MovementType.SELF, this.getVelocity());
+                if (this.horizontalCollision && !this.getWorld().isClient) {
+                    m = this.getVelocity().horizontalLength();
+                    double n = j - m;
+                    float o = (float) (n * 10.0 - 3.0);
+                    if (o > 0.0F) {
+                        this.playSound(this.getFallSound((int) o), 1.0F, 1.0F);
+                        this.damage(this.getDamageSources().flyIntoWall(), o);
+                    }
+                }
+
+                if (this.isOnGround() && !this.getWorld().isClient) {
+                    this.setFlag(7, false);
+                }
+            } else {
+                BlockPos blockPos = this.getVelocityAffectingPos();
+                float p = this.getWorld().getBlockState(blockPos).getBlock().getSlipperiness();
+                f = this.isOnGround() ? p * 0.91F : 0.91F;
+                Vec3d vec3d6 = this.applyMovementInput(movementInput, p);
+                double q = vec3d6.y;
+                if (this.hasStatusEffect(StatusEffects.LEVITATION)) {
+                    q += (0.05 * (double) (this.getStatusEffect(StatusEffects.LEVITATION).getAmplifier() + 1) - vec3d6.y) * 0.2;
+                } else if (this.getWorld().isClient && !this.getWorld().isChunkLoaded(blockPos)) {
+                    if (this.getY() > (double) this.getWorld().getBottomY()) {
+                        q = -0.1;
+                    } else {
+                        q = 0.0;
+                    }
+                } else if (!this.hasNoGravity()) {
+                    q -= d;
+                }
+
+                if (this.hasNoDrag()) {
+                    this.setVelocity(vec3d6.x, q, vec3d6.z);
+                } else {
+                    this.setVelocity(vec3d6.x * (double) f, q * 0.9800000190734863, vec3d6.z * (double) f);
+                }
+            }
         }
+
+        this.updateLimbs(this instanceof Flutterer);
     }
 }
