@@ -12,7 +12,7 @@
 		"sources": "https://space.bilibili.com/2028901576"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/make/icon.png",
+	"icon": "assets/wheat-mix/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
