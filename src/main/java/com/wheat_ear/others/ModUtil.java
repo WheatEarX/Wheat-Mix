@@ -13,17 +13,19 @@ import java.lang.reflect.Field;
 
 @SuppressWarnings("JavaReflectionMemberAccess")
 public class ModUtil {
-    public static final Class<Entity> entityClass = Entity.class;
 
-    public static void setGravityCancelled(Entity entity) {
+    public static void setValue(Class<?> classType, String fieldName, Object object, Object value) {
         try {
-            Field field = entityClass.getDeclaredField("gravityCancelled");
+            Field field = classType.getDeclaredField(fieldName);
             field.setAccessible(true);
-            field.setBoolean(entity, true);
+            field.set(object, value);
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void setGravityCancelled(Entity entity) {
+        setValue(Entity.class, "gravityCancelled", entity, true);
     }
 
     public static boolean canSetGravityCancelled(ItemStack stack) {
