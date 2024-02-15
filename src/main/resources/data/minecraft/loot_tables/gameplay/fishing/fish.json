@@ -26,7 +26,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "make:fish_puffer",
+          "name": "wheat-mix:fish_puffer",
           "weight": 30
         }
       ],
