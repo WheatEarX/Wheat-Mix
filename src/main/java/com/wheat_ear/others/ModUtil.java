@@ -11,10 +11,9 @@ import net.minecraft.util.Identifier;
 
 import java.lang.reflect.Field;
 
-@SuppressWarnings("JavaReflectionMemberAccess")
 public class ModUtil {
 
-    public static void setValue(Class<?> classType, String fieldName, Object object, Object value) {
+    public static void setValue(Class<?> classType, Object object, String fieldName, Object value) {
         try {
             Field field = classType.getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -25,7 +24,7 @@ public class ModUtil {
         }
     }
     public static void setGravityCancelled(Entity entity) {
-        setValue(Entity.class, "gravityCancelled", entity, true);
+        setValue(Entity.class, entity, "gravityCancelled", true);
     }
 
     public static boolean canSetGravityCancelled(ItemStack stack) {
