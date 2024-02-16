@@ -30,7 +30,6 @@ public abstract class CampfireBlockItemMixin {
             int loyaltyNegativeLevel = EnchantmentHelper.getLevel(ModEnchantments.LOYALTY_NEGATIVE, context.getStack());
             if (loyaltyNegativeLevel > 0) {
                 ModUtil.setValue(CampfireBlock.class, campfireBlock, "crazy", true);
-                System.out.println(114514);
             }
         }
     }

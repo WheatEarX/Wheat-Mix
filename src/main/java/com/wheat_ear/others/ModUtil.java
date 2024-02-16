@@ -12,6 +12,17 @@ import net.minecraft.util.Identifier;
 import java.lang.reflect.Field;
 
 public class ModUtil {
+    @SuppressWarnings("unchecked")
+    public static <T> T getValue(Class<?> classType, Object object, String fieldName, Class<T> fieldType) {
+        try {
+            Field field = classType.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return (T) field.get(object);
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void setValue(Class<?> classType, Object object, String fieldName, Object value) {
         try {
@@ -23,6 +34,7 @@ public class ModUtil {
             throw new RuntimeException(e);
         }
     }
+
     public static void setGravityCancelled(Entity entity) {
         setValue(Entity.class, entity, "gravityCancelled", true);
     }

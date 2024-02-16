@@ -9,6 +9,7 @@
     "LivingEntityMiscMixin",
     "crazyFire.CampfireBlockItemMixin",
     "crazyFire.CampfireBlockMixin",
+    "crazyFire.PlayerEntityMixin",
     "gravityCancellation.BoatItemMixin",
     "gravityCancellation.BowItemMixin",
     "gravityCancellation.CrossBowItemMixin",
