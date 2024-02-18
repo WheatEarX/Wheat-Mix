@@ -7,9 +7,6 @@
     "EnchantmentMixin",
     "GlassBottleItemMixin",
     "LivingEntityMiscMixin",
-    "crazyFire.CampfireBlockItemMixin",
-    "crazyFire.CampfireBlockMixin",
-    "crazyFire.PlayerEntityMixin",
     "gravityCancellation.BoatItemMixin",
     "gravityCancellation.BowItemMixin",
     "gravityCancellation.CrossBowItemMixin",
@@ -22,7 +19,9 @@
     "gravityCancellation.ItemEntityMixin",
     "gravityCancellation.SnowballItemMixin",
     "gravityCancellation.ThrowablePotionItemMixin",
-    "gravityCancellation.TridentItemMixin"
+    "gravityCancellation.TridentItemMixin",
+    "water.PotionEntityMixin",
+    "water.ThrowablePotionItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
