@@ -1,4 +1,4 @@
-package com.wheat_ear.mixin.gravityCancellation;
+package com.wheat_ear.mixin.gravity_cancellation;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EyeOfEnderEntity;

@@ -1,6 +1,7 @@
 package com.wheat_ear.item;
 
 import com.wheat_ear.WheatMix;
+import com.wheat_ear.block.ModBlocks;
 import com.wheat_ear.others.ModFoodComponents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.*;
@@ -20,7 +21,19 @@ public class ModItems {
     public static final Item DOLPHIN_LIQUID_BOTTLE = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "dolphin_liquid_bottle"),
             new DolphinLiquidItem(new Item.Settings().maxCount(1)));
+    public static final Item CREATIVE_TRAIL_CARD_LEVEL_1 = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "creative_trail_card_level_1"),
+            new CreativeTrailCardItem((byte) 1, 10, new Item.Settings().rarity(Rarity.UNCOMMON)));
+    public static final Item CREATIVE_TRAIL_CARD_LEVEL_2 = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "creative_trail_card_level_2"),
+            new CreativeTrailCardItem((byte) 2, 20, new Item.Settings().rarity(Rarity.RARE)));
+    public static final Item CREATIVE_TRAIL_CARD_LEVEL_3 = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "creative_trail_card_level_3"),
+            new CreativeTrailCardItem((byte) 3, 25, new Item.Settings().rarity(Rarity.EPIC)));
     @SuppressWarnings("unused")
+    public static final Item PAPER_BLOCK = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "paper_block"),
+            new BlockItem(ModBlocks.PAPER_BLOCK, new Item.Settings()));
     public static final Item REMOTE_CONNECTOR = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "remote_connector"),
             new RemoteConnectorItem(new Item.Settings().maxCount(1)));
@@ -31,6 +44,10 @@ public class ModItems {
                 entries.add(FISH_PUFFER);
                 entries.add(REDDEN_APPLE);
                 entries.add(DOLPHIN_LIQUID_BOTTLE);
+                entries.add(CREATIVE_TRAIL_CARD_LEVEL_1);
+                entries.add(CREATIVE_TRAIL_CARD_LEVEL_2);
+                entries.add(CREATIVE_TRAIL_CARD_LEVEL_3);
+                entries.add(REMOTE_CONNECTOR);
             })
             .build();
 }

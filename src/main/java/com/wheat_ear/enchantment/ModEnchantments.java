@@ -28,9 +28,9 @@ public class ModEnchantments {
     public static final Enchantment GRAVITY_CANCELLATION = Registry.register(Registries.ENCHANTMENT,
             new Identifier(WheatMix.MOD_ID, "gravity_cancellation"),
             new GravityCancellationEnchantment());
-    public static final Enchantment LOYALTY_NEGATIVE = Registry.register(Registries.ENCHANTMENT,
-            new Identifier(WheatMix.MOD_ID, "loyalty_negative"),
-            new GravityCancellationEnchantment());
+    public static final Enchantment CHEATER = Registry.register(Registries.ENCHANTMENT,
+            new Identifier(WheatMix.MOD_ID, "cheater"),
+            new CheaterEnchantment());
 
     public static void RegisterModEnchantments() {
         WheatMix.LOGGER.debug("Registering mod enchantments for" + WheatMix.MOD_ID);

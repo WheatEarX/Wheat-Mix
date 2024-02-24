@@ -1,5 +1,6 @@
 {
   "itemGroup.wheat-mix.weNeed": "All These",
+  "block.wheat-mix.paper_block": "Paper Block",
   "effect.wheat-mix.air_breathing": "Air Breathing",
   "effect.wheat-mix.jump_reduction": "Jump Reduction",
   "effect.wheat-mix.resistance_reduction": "Resistance Reduction",
@@ -10,6 +11,9 @@
   "item.wheat-mix.redden_apple": "Redstone Apple",
   "item.wheat-mix.dolphin_liquid_bottle": "Dolphin Liquid Bottle",
   "item.wheat-mix.remote_connector": "Remote Connector",
+  "item.wheat-mix.creative_trail_card_level_1": "Creative Mode Trail Card (Level 1)",
+  "item.wheat-mix.creative_trail_card_level_2": "Creative Mode Trail Card (Level 2)",
+  "item.wheat-mix.creative_trail_card_level_3": "Creative Mode Trail Card (Level 3)",
   "item.minecraft.lingering_potion.effect.air_breathing": "Lingering Potion of Air Breathing",
   "item.minecraft.lingering_potion.effect.health_reduction": "Lingering Potion of Health Reduction",
   "item.minecraft.lingering_potion.effect.jump_reduction": "Lingering Potion of Jumping Reduction",
@@ -33,6 +37,8 @@
   "enchantment.wheat-mix.arthropod": "Arthropod",
   "enchantment.wheat-mix.disappear": "Disappear",
   "enchantment.wheat-mix.gravity_cancellation": "Gravity Cancellation",
-  "enchantment.wheat-mix.loyalty_negative": "Loyalty -1",
-  "haha.remote_connector_screen": "Remote Connector"
+  "enchantment.wheat-mix.cheater": "Cheater",
+  "haha.remote_connector_screen": "Remote Connector",
+  "text.wheat-mix.do_not_move": "You Can't Move!",
+  "text.wheat-mix.do_not_open": "You Can't Open Inventory Screen!"
 }

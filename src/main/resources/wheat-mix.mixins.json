@@ -7,23 +7,27 @@
     "EnchantmentMixin",
     "GlassBottleItemMixin",
     "LivingEntityMiscMixin",
-    "gravityCancellation.BoatItemMixin",
-    "gravityCancellation.BowItemMixin",
-    "gravityCancellation.CrossBowItemMixin",
-    "gravityCancellation.EggItemMixin",
-    "gravityCancellation.EnderEyeItemMixin",
-    "gravityCancellation.EnderPearlItemMixin",
-    "gravityCancellation.EntityMixin",
-    "gravityCancellation.EntityTypeMixin",
-    "gravityCancellation.ExperienceBottleItemMixin",
-    "gravityCancellation.ItemEntityMixin",
-    "gravityCancellation.SnowballItemMixin",
-    "gravityCancellation.ThrowablePotionItemMixin",
-    "gravityCancellation.TridentItemMixin",
+    "creative_trail_card.PlayerEntityMixin",
+    "gravity_cancellation.BoatItemMixin",
+    "gravity_cancellation.BowItemMixin",
+    "gravity_cancellation.CrossBowItemMixin",
+    "gravity_cancellation.EggItemMixin",
+    "gravity_cancellation.EnderEyeItemMixin",
+    "gravity_cancellation.EnderPearlItemMixin",
+    "gravity_cancellation.EntityMixin",
+    "gravity_cancellation.EntityTypeMixin",
+    "gravity_cancellation.ExperienceBottleItemMixin",
+    "gravity_cancellation.ItemEntityMixin",
+    "gravity_cancellation.SnowballItemMixin",
+    "gravity_cancellation.ThrowablePotionItemMixin",
+    "gravity_cancellation.TridentItemMixin",
     "water.PotionEntityMixin",
     "water.ThrowablePotionItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  },
+  "client": [
+    "creative_trail_card.MinecraftClientMixin"
+  ]
 }
