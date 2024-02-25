@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "wheat-mix:creative_trail_card_level_1"
+    }
+  },
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "result": {
+    "count": 1,
+    "item": "wheat-mix:creative_trail_card_level_2"
+  },
+  "show_notification": true
+}
