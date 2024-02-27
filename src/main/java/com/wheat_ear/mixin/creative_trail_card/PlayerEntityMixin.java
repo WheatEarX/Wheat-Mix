@@ -39,7 +39,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     cardItem.firstUse = false;
                 }
                 if (cardItem.onUse && nowPos != null) {
-                    this.refreshPositionAfterTeleport(nowPos.down().toCenterPos());
+                    this.refreshPositionAfterTeleport(nowPos.toCenterPos().add(0, -0.5, 0));
                     if (messageTicks >= 5) {
                         this.sendMessage(Text.translatable("text.wheat-mix.do_not_move"));
                         messageTicks = 0;

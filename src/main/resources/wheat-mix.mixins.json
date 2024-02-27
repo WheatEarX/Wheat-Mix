@@ -28,6 +28,7 @@
     "defaultRequire": 1
   },
   "client": [
-    "creative_trail_card.MinecraftClientMixin"
+    "creative_trail_card.MinecraftClientMixin",
+    "creative_trail_card.MouseMixin"
   ]
 }

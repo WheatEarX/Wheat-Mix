@@ -45,11 +45,11 @@ public class CreativeTrailCardItem extends Item {
         }
 
         if (user instanceof ServerPlayerEntity serverPlayer && !serverPlayer.isCreative()) {
+            stack.decrement(1);
             onUse = true;
             firstUse = true;
-            serverPlayer.changeGameMode(GameMode.CREATIVE);
             timer.schedule(new TimeControlTask(serverPlayer), 0, 1000);
-            stack.decrement(1);
+            serverPlayer.changeGameMode(GameMode.CREATIVE);
 
             return TypedActionResult.success(stack);
         }
