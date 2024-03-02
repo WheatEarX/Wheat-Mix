@@ -13,8 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -49,9 +47,10 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity {
         }
     }
 
+    @SuppressWarnings("RedundantCast")
     @Unique
     private void clearLookAt() {
-        MinecraftClient client = ModUtil.getValue(ClientPlayerEntity.class, this, "client", MinecraftClient.class);
+        MinecraftClient client = ModUtil.getValue(ClientPlayerEntity.class, this, "client");
         HitResult hitResult = client.crosshairTarget;
         World world = getWorld();
         if (hitResult != null) {

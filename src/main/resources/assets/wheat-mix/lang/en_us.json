@@ -1,5 +1,6 @@
 {
   "itemGroup.wheat-mix.weNeed": "All These",
+  "block.wheat-mix.random_block": "Random Block",
   "effect.wheat-mix.air_breathing": "Air Breathing",
   "effect.wheat-mix.jump_reduction": "Jump Reduction",
   "effect.wheat-mix.resistance_reduction": "Resistance Reduction",
@@ -39,6 +40,7 @@
   "enchantment.wheat-mix.gravity_cancellation": "Gravity Cancellation",
   "enchantment.wheat-mix.cheater": "Cheater",
   "enchantment.wheat-mix.sight_clear": "Sight Clear",
+  "enchantment.wheat-mix.random": "\u00A7k1145141919",
   "text.wheat-mix.remote_connector_screen": "Remote Connector",
   "text.wheat-mix.do_not_move": "You Can't Move!",
   "text.wheat-mix.do_not_open": "You Can't Open Inventory Screen!"

@@ -21,6 +21,7 @@ public class RandomItem extends Item {
         if (!world.isClient) {
             Item item = ModUtil.getRandomFromRegistry(Registries.ITEM);
             ItemStack stack2 = new ItemStack(item, stack1.getCount());
+
             user.setStackInHand(hand, stack2);
             return TypedActionResult.success(stack2);
         }

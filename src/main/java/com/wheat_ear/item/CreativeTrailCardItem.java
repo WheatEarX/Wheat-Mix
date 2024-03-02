@@ -44,7 +44,7 @@ public class CreativeTrailCardItem extends Item {
         }
 
         if (user instanceof ServerPlayerEntity serverPlayer && !serverPlayer.isCreative()) {
-            stack.decrement(1);
+            user.getStackInHand(hand).decrement(1);
             onUse = true;
             firstUse = true;
             timer.schedule(new TimeControlTask(serverPlayer), 0, 1000);

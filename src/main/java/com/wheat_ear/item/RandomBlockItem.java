@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,10 +24,10 @@ public class RandomBlockItem extends BlockItem {
             Block block = ModUtil.getRandomFromRegistry(Registries.BLOCK);
             BlockState blockState = block.getPlacementState(context);
 
-            if (blockState != null) {
-                return world.setBlockState(blockPos, blockState, 26);
+            if (blockState == null || block.getRequiredFeatures().contains(FeatureFlags.UPDATE_1_21)) {
+                return place(context, state);
             }
-            return place(context, state);
+            return world.setBlockState(blockPos, blockState, 26);
         }
         return true;
     }

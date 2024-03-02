@@ -33,8 +33,11 @@ public abstract class ItemEntityMixin extends Entity {
         ItemStack stack = getStack();
         if (EnchantmentHelper.getLevel(ModEnchantments.RANDOM, stack) > 0) {
             Enchantment enchantment = ModUtil.getRandomFromRegistry(Registries.ENCHANTMENT);
-            int level = new Random().nextInt(enchantment.getMinLevel(), enchantment.getMaxLevel());
+            int level = new Random().nextInt(enchantment.getMinLevel(), enchantment.getMaxLevel() + 1);
 
+            if (stack.getNbt() != null) {
+                stack.getNbt().remove("Enchantments");
+            }
             stack.addEnchantment(enchantment, level);
             setStack(stack);
         }

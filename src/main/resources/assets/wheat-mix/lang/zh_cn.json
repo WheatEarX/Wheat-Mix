@@ -1,5 +1,6 @@
 {
   "itemGroup.wheat-mix.weNeed": "所有",
+  "block.wheat-mix.random_block": "随机方块",
   "effect.wheat-mix.air_breathing": "水上呼吸",
   "effect.wheat-mix.jump_reduction": "跳跃削减",
   "effect.wheat-mix.resistance_reduction": "抗性减弱",
@@ -39,6 +40,7 @@
   "enchantment.wheat-mix.gravity_cancellation": "重力消除",
   "enchantment.wheat-mix.cheater": "理赔",
   "enchantment.wheat-mix.sight_clear": "视线消除",
+  "enchantment.wheat-mix.random": "\u00A7k1145141919",
   "text.wheat-mix.remote_connector_screen": "远程桌面连接",
   "text.wheat-mix.do_not_move": "禁止移动！",
   "text.wheat-mix.do_not_open": "禁止打开物品栏！"

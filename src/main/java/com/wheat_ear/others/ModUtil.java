@@ -1,6 +1,7 @@
 package com.wheat_ear.others;
 
 import com.wheat_ear.enchantment.ModEnchantments;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ public class ModUtil {
     public static final Random random = new Random();
 
     @SuppressWarnings("unchecked")
-    public static <T> T getValue(Class<?> classType, Object object, String fieldName, Class<T> fieldType) {
+    public static <T> T getValue(Class<?> classType, Object object, String fieldName) {
         try {
             Field field = classType.getDeclaredField(fieldName);
             field.setAccessible(true);
@@ -52,14 +53,14 @@ public class ModUtil {
         return EnchantmentHelper.getLevel(ModEnchantments.GRAVITY_CANCELLATION, stack) > 0;
     }
 
-    public static int getEnchantmentFromNbt(NbtCompound nbt) {
+    public static int getEnchantmentFromNbt(NbtCompound nbt, Enchantment enchantment) {
         NbtList nbtList = nbt.getList("Enchantments", 10);
 
         for (int i = 0; i < nbtList.size(); ++i) {
             NbtCompound nbtCompound = nbtList.getCompound(i);
             Identifier identifier = EnchantmentHelper.getIdFromNbt(nbtCompound);
 
-            if (identifier != null && identifier.equals(Registries.ENCHANTMENT.getId(ModEnchantments.GRAVITY_CANCELLATION))) {
+            if (identifier != null && identifier.equals(Registries.ENCHANTMENT.getId(enchantment))) {
                 return EnchantmentHelper.getLevelFromNbt(nbtCompound);
             }
         }
