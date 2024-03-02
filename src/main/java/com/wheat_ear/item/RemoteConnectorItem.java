@@ -55,7 +55,7 @@ public class RemoteConnectorItem extends Item {
         return new NamedScreenHandlerFactory() {
             @Override
             public Text getDisplayName() {
-                return Text.translatable("haha.remote_connector_screen");
+                return Text.translatable("text.wheat-mix.remote_connector_screen");
             }
 
             @Override

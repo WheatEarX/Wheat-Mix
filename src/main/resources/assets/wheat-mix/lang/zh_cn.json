@@ -1,6 +1,5 @@
 {
   "itemGroup.wheat-mix.weNeed": "所有",
-  "block.wheat-mix.paper_block": "纸块",
   "effect.wheat-mix.air_breathing": "水上呼吸",
   "effect.wheat-mix.jump_reduction": "跳跃削减",
   "effect.wheat-mix.resistance_reduction": "抗性减弱",
@@ -14,6 +13,7 @@
   "item.wheat-mix.creative_trail_card_level_1": "创造模式体验卡（等级1）",
   "item.wheat-mix.creative_trail_card_level_2": "创造模式体验卡（等级2）",
   "item.wheat-mix.creative_trail_card_level_3": "创造模式体验卡（等级3）",
+  "item.wheat-mix.random_item": "随机物品",
   "item.minecraft.lingering_potion.effect.air_breathing": "滞留型水上呼吸药水",
   "item.minecraft.lingering_potion.effect.health_reduction": "滞留型生命值下降药水",
   "item.minecraft.lingering_potion.effect.jump_reduction": "滞留型跳跃削减药水",
@@ -39,7 +39,7 @@
   "enchantment.wheat-mix.gravity_cancellation": "重力消除",
   "enchantment.wheat-mix.cheater": "理赔",
   "enchantment.wheat-mix.sight_clear": "视线消除",
-  "haha.remote_connector_screen": "远程桌面连接",
+  "text.wheat-mix.remote_connector_screen": "远程桌面连接",
   "text.wheat-mix.do_not_move": "禁止移动！",
   "text.wheat-mix.do_not_open": "禁止打开物品栏！"
 }

@@ -34,6 +34,9 @@ public class ModEnchantments {
     public static final Enchantment SIGHT_CLEAR = Registry.register(Registries.ENCHANTMENT,
             new Identifier(WheatMix.MOD_ID, "sight_clear"),
             new SightClearEnchantment());
+    public static final Enchantment RANDOM = Registry.register(Registries.ENCHANTMENT,
+            new Identifier(WheatMix.MOD_ID, "random"),
+            new SightClearEnchantment());
 
     public static void RegisterModEnchantments() {
         WheatMix.LOGGER.debug("Registering mod enchantments for" + WheatMix.MOD_ID);

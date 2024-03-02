@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
 	"id": "wheat-mix",
-	"version": "0.7.3",
+	"version": "0.7.5",
 	"name": "Make",
-	"description": "Something made by Wheat_ear. Just for fun. ",
+	"description": "Something made by Wheat_ear. Just for fun.",
 	"authors": [
 		"Wheat_ear"
 	],

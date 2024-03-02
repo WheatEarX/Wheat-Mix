@@ -7,11 +7,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import java.lang.reflect.Field;
+import java.util.Random;
 
 public class ModUtil {
+
+    public static final Random random = new Random();
+
     @SuppressWarnings("unchecked")
     public static <T> T getValue(Class<?> classType, Object object, String fieldName, Class<T> fieldType) {
         try {
@@ -33,6 +38,10 @@ public class ModUtil {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static <T> T getRandomFromRegistry(Registry<T> registry) {
+        return registry.get(random.nextInt(registry.size()));
     }
 
     public static void setGravityCancelled(Entity entity) {

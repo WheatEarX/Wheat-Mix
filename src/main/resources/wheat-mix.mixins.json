@@ -4,10 +4,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "BrewingRecipeMixin",
+    "ClientPlayerEntityMixin",
     "EnchantmentMixin",
     "GlassBottleItemMixin",
     "LivingEntityMiscMixin",
-    "ClientPlayerEntityMixin",
     "creative_trail_card.PlayerEntityMixin",
     "gravity_cancellation.BoatItemMixin",
     "gravity_cancellation.BowItemMixin",
@@ -22,6 +22,7 @@
     "gravity_cancellation.SnowballItemMixin",
     "gravity_cancellation.ThrowablePotionItemMixin",
     "gravity_cancellation.TridentItemMixin",
+    "random_enchantment.ItemEntityMixin",
     "water.PotionEntityMixin",
     "water.ThrowablePotionItemMixin"
   ],
