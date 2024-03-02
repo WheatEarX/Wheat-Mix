@@ -137,22 +137,21 @@ public abstract class LivingEntityMiscMixin extends Entity {
     public void tickMovement(CallbackInfo ci) {
         Iterator<ItemStack> itemStacks = this.getArmorItems().iterator();
         ItemStack itemStack;
-        int fireLevel, gravityCancellationLevel = 0;
+        int fireLevel, gravityCancellationLevel, sightClearLevel;
         while (itemStacks.hasNext()) {
             itemStack = itemStacks.next();
             fireLevel = EnchantmentHelper.getLevel(ModEnchantments.FIRE, itemStack);
-            // New
+
             gravityCancellationLevel = EnchantmentHelper.getLevel(ModEnchantments.GRAVITY_CANCELLATION, itemStack);
+
             if (fireLevel > 0) {
                 this.setFireTicks(20);
+                break;
             }
             if (gravityCancellationLevel > 0) {
                 ModUtil.setGravityCancelled(this);
                 break;
             }
-        }
-        if (gravityCancellationLevel <= 0) {
-            this.setNoGravity(false);
         }
     }
 

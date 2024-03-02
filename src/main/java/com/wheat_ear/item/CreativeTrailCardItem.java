@@ -35,7 +35,6 @@ public class CreativeTrailCardItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
         int cheaterLevel = EnchantmentHelper.getLevel(ModEnchantments.CHEATER, stack);
-        System.out.println(cheaterLevel);
 
         if (cheaterLevel >= 10) {
             lastTime = 114514;

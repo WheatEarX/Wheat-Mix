@@ -21,7 +21,6 @@ public abstract class EntityTypeMixin<T> {
     at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT)
     public void spawn(ServerWorld world, NbtCompound itemNbt, Consumer<T> afterConsumer, BlockPos pos, SpawnReason reason, boolean alignPosition, boolean invertY, CallbackInfoReturnable<T> cir, Entity entity) {
         int level = ModUtil.getEnchantmentFromNbt(itemNbt);
-        System.out.println(level);
 
         if (level > 0) {
             ModUtil.setGravityCancelled(entity);
