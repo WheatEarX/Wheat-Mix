@@ -27,6 +27,7 @@ public class RandomBlockItem extends BlockItem {
             if (blockState == null || block.getRequiredFeatures().contains(FeatureFlags.UPDATE_1_21)) {
                 return place(context, state);
             }
+
             return world.setBlockState(blockPos, blockState, 26);
         }
         return true;

@@ -23,6 +23,7 @@
     "gravity_cancellation.ThrowablePotionItemMixin",
     "gravity_cancellation.TridentItemMixin",
     "random_enchantment.ItemEntityMixin",
+    "random_enchantment.SpawnEggItemMixin",
     "water.PotionEntityMixin",
     "water.ThrowablePotionItemMixin"
   ],

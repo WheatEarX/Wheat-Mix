@@ -53,7 +53,7 @@ public class ModUtil {
         return EnchantmentHelper.getLevel(ModEnchantments.GRAVITY_CANCELLATION, stack) > 0;
     }
 
-    public static int getEnchantmentFromNbt(NbtCompound nbt, Enchantment enchantment) {
+    public static int getEnchantmentLevelFromNbt(NbtCompound nbt, Enchantment enchantment) {
         NbtList nbtList = nbt.getList("Enchantments", 10);
 
         for (int i = 0; i < nbtList.size(); ++i) {
