@@ -128,7 +128,7 @@ public class NotepadItem extends Item {
 
         StringBuilder builder = new StringBuilder();
         NbtList list = Objects.requireNonNull(compound).getList("pages", NbtElement.STRING_TYPE);
-        for (NbtElement element : list) {
+        for (NbtElement element: list) {
             builder.append(element.asString()).append("\n");
         }
         content = builder.toString();
