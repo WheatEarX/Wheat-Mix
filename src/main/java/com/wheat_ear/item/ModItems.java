@@ -39,6 +39,9 @@ public class ModItems {
     public static final Item RANDOM_BLOCK = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "random_block"),
             new RandomBlockItem(ModBlocks.RANDOM_BLOCK, new Item.Settings()));
+    public static final Item NOTEPAD = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "notepad"),
+            new NotepadItem(new Item.Settings().maxCount(1)));
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
             .displayName(Text.translatable("itemGroup.wheat-mix.weNeed"))

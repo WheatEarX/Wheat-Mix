@@ -43,5 +43,16 @@
   "enchantment.wheat-mix.random": "\u00A7k1145141919",
   "text.wheat-mix.remote_connector_screen": "Remote Connector",
   "text.wheat-mix.do_not_move": "You Can't Move!",
-  "text.wheat-mix.do_not_open": "You Can't Open Inventory Screen!"
+  "text.wheat-mix.do_not_open": "You Can't Open Inventory Screen!",
+  "text.wheat-mix.notepad.read": "Read",
+  "text.wheat-mix.notepad.write": "Write",
+  "text.wheat-mix.notepad.append": "Append",
+  "text.wheat-mix.notepad.clear": "Clear",
+  "text.wheat-mix.notepad.read.fail": "Fail to read file",
+  "text.wheat-mix.notepad.write.fail": "Fail to write the content",
+  "text.wheat-mix.notepad.write.success": "Write successfully",
+  "text.wheat-mix.notepad.append.fail": "Fail to append the content",
+  "text.wheat-mix.notepad.append.success": "Append successfully",
+  "text.wheat-mix.notepad.clear.fail": "Fail to clear the file",
+  "text.wheat-mix.notepad.clear.success": "Clear successfully"
 }

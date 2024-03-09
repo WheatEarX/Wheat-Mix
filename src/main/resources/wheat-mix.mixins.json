@@ -22,6 +22,7 @@
     "gravity_cancellation.SnowballItemMixin",
     "gravity_cancellation.ThrowablePotionItemMixin",
     "gravity_cancellation.TridentItemMixin",
+    "notepad.PlayerEntityMixin",
     "random_enchantment.ItemEntityMixin",
     "random_enchantment.SpawnEggItemMixin",
     "water.PotionEntityMixin",

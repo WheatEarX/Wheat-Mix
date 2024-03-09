@@ -1,5 +1,6 @@
 package com.wheat_ear;
 
+import com.wheat_ear.command.NotepadCommand;
 import com.wheat_ear.enchantment.ModEnchantments;
 import com.wheat_ear.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -14,6 +15,7 @@ public class WheatMix implements ModInitializer {
     public static final String MOD_ID = "wheat-mix";
 
     private static void registerCommands() {
+        NotepadCommand.register();
     }
 
     @Override
