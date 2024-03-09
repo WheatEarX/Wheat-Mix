@@ -43,5 +43,17 @@
   "enchantment.wheat-mix.random": "\u00A7k1145141919",
   "text.wheat-mix.remote_connector_screen": "远程桌面连接",
   "text.wheat-mix.do_not_move": "禁止移动！",
-  "text.wheat-mix.do_not_open": "禁止打开物品栏！"
+  "text.wheat-mix.do_not_open": "禁止打开物品栏！",
+  "text.wheat-mix.notepad.read": "读取",
+  "text.wheat-mix.notepad.write": "写入",
+  "text.wheat-mix.notepad.append": "追加",
+  "text.wheat-mix.notepad.clear": "清除",
+  "text.wheat-mix.notepad.read.fail": "读取失败",
+  "text.wheat-mix.notepad.read.success": "读取成功",
+  "text.wheat-mix.notepad.write.fail": "写入内容失败",
+  "text.wheat-mix.notepad.write.success": "写入成功",
+  "text.wheat-mix.notepad.append.fail": "追加内容失败",
+  "text.wheat-mix.notepad.append.success": "追加成功",
+  "text.wheat-mix.notepad.clear.fail": "清除失败",
+  "text.wheat-mix.notepad.clear.success": "清除成功"
 }

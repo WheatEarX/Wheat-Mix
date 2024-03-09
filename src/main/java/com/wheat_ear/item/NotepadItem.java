@@ -24,6 +24,7 @@ import java.util.Objects;
 public class NotepadItem extends Item {
 
     public static MutableText READ_FAIL = Text.translatable("text.wheat-mix.notepad.read.fail");
+    public static MutableText READ_SUCCESS = Text.translatable("text.wheat-mix.notepad.read.success");
     public static MutableText WRITE_FAIL = Text.translatable("text.wheat-mix.notepad.write.fail");
     public static MutableText WRITE_SUCCESS = Text.translatable("text.wheat-mix.notepad.write.success");
     public static MutableText APPEND_FAIL = Text.translatable("text.wheat-mix.notepad.append.fail");
@@ -117,6 +118,7 @@ public class NotepadItem extends Item {
             user.sendMessage(READ_FAIL);
             throw new RuntimeException(e);
         }
+        user.sendMessage(READ_SUCCESS);
         return TypedActionResult.success(mainHandStack);
     }
 

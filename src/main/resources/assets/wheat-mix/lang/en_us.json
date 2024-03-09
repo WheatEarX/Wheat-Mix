@@ -49,6 +49,7 @@
   "text.wheat-mix.notepad.append": "Append",
   "text.wheat-mix.notepad.clear": "Clear",
   "text.wheat-mix.notepad.read.fail": "Fail to read file",
+  "text.wheat-mix.notepad.read.success": "Read successfully",
   "text.wheat-mix.notepad.write.fail": "Fail to write the content",
   "text.wheat-mix.notepad.write.success": "Write successfully",
   "text.wheat-mix.notepad.append.fail": "Fail to append the content",
