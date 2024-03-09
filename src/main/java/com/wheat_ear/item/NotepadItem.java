@@ -31,8 +31,7 @@ public class NotepadItem extends Item {
     public static MutableText APPEND_SUCCESS = Text.translatable("text.wheat-mix.notepad.append.success");
     public static MutableText CLEAR_FAIL = Text.translatable("text.wheat-mix.notepad.clear.fail");
     public static MutableText CLEAR_SUCCESS = Text.translatable("text.wheat-mix.notepad.clear.success");
-    public static NotepadState[] STATE_ORDER = new NotepadState[]{NotepadState.READ, NotepadState.WRITE, NotepadState.APPEND, NotepadState.CLEAR};
-
+    public static NotepadState[] STATE_ORDER = new NotepadState[] {NotepadState.READ, NotepadState.WRITE, NotepadState.APPEND, NotepadState.CLEAR};
     public NotepadState state = NotepadState.READ;
 
     public NotepadItem(Settings settings) {
@@ -64,10 +63,10 @@ public class NotepadItem extends Item {
             }
         }
         else if (state.equals(NotepadState.CLEAR)) {
-            return clear(user, offHandStack);
+            return clear(user, mainHandStack);
         }
 
-        return TypedActionResult.pass(offHandStack);
+        return TypedActionResult.pass(mainHandStack);
     }
 
     @SuppressWarnings("StringConcatenationInLoop")
@@ -118,7 +117,9 @@ public class NotepadItem extends Item {
             user.sendMessage(READ_FAIL);
             throw new RuntimeException(e);
         }
+
         user.sendMessage(READ_SUCCESS);
+
         return TypedActionResult.success(mainHandStack);
     }
 
@@ -127,11 +128,13 @@ public class NotepadItem extends Item {
         String content;
 
         StringBuilder builder = new StringBuilder();
-        NbtList list = Objects.requireNonNull(compound).getList("pages", NbtElement.STRING_TYPE);
+        NbtList list = Objects.requireNonNull(compound).getList("pages", 9);
+
         for (NbtElement element: list) {
             builder.append(element.asString()).append("\n");
         }
         content = builder.toString();
+
         File file;
         if (NotepadConfig.file != null) {
             file = NotepadConfig.file;
@@ -155,7 +158,9 @@ public class NotepadItem extends Item {
             user.sendMessage(WRITE_FAIL);
             throw new RuntimeException(e);
         }
+
         user.sendMessage(WRITE_SUCCESS);
+
         return TypedActionResult.success(mainHandStack);
     }
 
@@ -193,7 +198,7 @@ public class NotepadItem extends Item {
             reader.close();
 
         } catch (IOException e) {
-            user.sendMessage(READ_FAIL);
+            user.sendMessage(APPEND_FAIL);
             throw new RuntimeException(e);
         }
 
@@ -222,7 +227,9 @@ public class NotepadItem extends Item {
             user.sendMessage(APPEND_FAIL);
             throw new RuntimeException(e);
         }
+
         user.sendMessage(APPEND_SUCCESS);
+
         return TypedActionResult.success(mainHandStack);
     }
 
@@ -250,7 +257,9 @@ public class NotepadItem extends Item {
             user.sendMessage(CLEAR_FAIL);
             throw new RuntimeException(e);
         }
+
         user.sendMessage(CLEAR_SUCCESS);
+
         return TypedActionResult.success(stack);
     }
 
