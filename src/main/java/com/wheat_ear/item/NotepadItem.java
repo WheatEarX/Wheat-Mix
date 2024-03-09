@@ -18,20 +18,20 @@ import net.minecraft.world.World;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class NotepadItem extends Item {
-
-    public static MutableText READ_FAIL = Text.translatable("text.wheat-mix.notepad.read.fail");
-    public static MutableText READ_SUCCESS = Text.translatable("text.wheat-mix.notepad.read.success");
-    public static MutableText WRITE_FAIL = Text.translatable("text.wheat-mix.notepad.write.fail");
-    public static MutableText WRITE_SUCCESS = Text.translatable("text.wheat-mix.notepad.write.success");
-    public static MutableText APPEND_FAIL = Text.translatable("text.wheat-mix.notepad.append.fail");
-    public static MutableText APPEND_SUCCESS = Text.translatable("text.wheat-mix.notepad.append.success");
-    public static MutableText CLEAR_FAIL = Text.translatable("text.wheat-mix.notepad.clear.fail");
-    public static MutableText CLEAR_SUCCESS = Text.translatable("text.wheat-mix.notepad.clear.success");
-    public static NotepadState[] STATE_ORDER = new NotepadState[] {NotepadState.READ, NotepadState.WRITE, NotepadState.APPEND, NotepadState.CLEAR};
+    private static final MutableText READ_FAIL = Text.translatable("text.wheat-mix.notepad.read.fail");
+    private static final MutableText READ_SUCCESS = Text.translatable("text.wheat-mix.notepad.read.success");
+    private static final MutableText WRITE_FAIL = Text.translatable("text.wheat-mix.notepad.write.fail");
+    private static final MutableText WRITE_SUCCESS = Text.translatable("text.wheat-mix.notepad.write.success");
+    private static final MutableText APPEND_FAIL = Text.translatable("text.wheat-mix.notepad.append.fail");
+    private static final MutableText APPEND_SUCCESS = Text.translatable("text.wheat-mix.notepad.append.success");
+    private static final MutableText CLEAR_FAIL = Text.translatable("text.wheat-mix.notepad.clear.fail");
+    private static final MutableText CLEAR_SUCCESS = Text.translatable("text.wheat-mix.notepad.clear.success");
+    private static final NotepadState[] STATE_ORDER = new NotepadState[] {NotepadState.READ, NotepadState.WRITE, NotepadState.APPEND, NotepadState.CLEAR};
     public NotepadState state = NotepadState.READ;
 
     public NotepadItem(Settings settings) {
@@ -40,41 +40,43 @@ public class NotepadItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack offHandStack = user.getOffHandStack();
-        ItemStack mainHandStack = user.getMainHandStack();
-        if (offHandStack.isOf(Items.WRITABLE_BOOK) || offHandStack.isOf(Items.WRITTEN_BOOK)) {
-            NbtCompound compound = offHandStack.getNbt();
+        if (!user.getWorld().isClient) {
+            ItemStack offHandStack = user.getOffHandStack();
+            ItemStack mainHandStack = user.getMainHandStack();
+            if (offHandStack.isOf(Items.WRITABLE_BOOK) || offHandStack.isOf(Items.WRITTEN_BOOK)) {
+                NbtCompound compound = offHandStack.getNbt();
 
-            if (compound != null) {
-                switch (state) {
-                    case READ -> {
-                        return read(user, offHandStack, mainHandStack);
-                    }
-                    case WRITE -> {
-                        return write(user, offHandStack, mainHandStack);
-                    }
-                    case APPEND -> {
-                        return append(user, offHandStack, mainHandStack);
-                    }
-                    case CLEAR -> {
-                        return clear(user, mainHandStack);
+                if (compound != null) {
+                    switch (state) {
+                        case READ -> {
+                            return read(user, offHandStack, mainHandStack);
+                        }
+                        case WRITE -> {
+                            return write(user, offHandStack, mainHandStack);
+                        }
+                        case APPEND -> {
+                            return append(user, offHandStack, mainHandStack);
+                        }
+                        case CLEAR -> {
+                            return clear(user, mainHandStack);
+                        }
                     }
                 }
             }
+            else if (state.equals(NotepadState.CLEAR)) {
+                return clear(user, mainHandStack);
+            }
         }
-        else if (state.equals(NotepadState.CLEAR)) {
-            return clear(user, mainHandStack);
-        }
-
-        return TypedActionResult.pass(mainHandStack);
+        return TypedActionResult.success(user.getStackInHand(hand));
     }
 
     @SuppressWarnings("StringConcatenationInLoop")
     public static TypedActionResult<ItemStack> read(PlayerEntity user, ItemStack offHandStack, ItemStack mainHandStack) {
         String line;
-        String result;
-        String writerString = "";
+        ArrayList<String> strings = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
+        String writerString = "";
+        int lineCount = 0;
 
         File file;
         if (NotepadConfig.file != null) {
@@ -93,17 +95,27 @@ public class NotepadItem extends Item {
 
             line = bufferedReader.readLine();
 
+            strings.add("");
+
             while (line != null) {
-                builder.append(line);
+                builder.append(line).append("\n");
+                lineCount += 1;
+                if (lineCount % 5 == 0) {
+                    strings.set(strings.size() - 1, builder.toString());
+                    strings.add("");
+                    builder = new StringBuilder();
+                }
                 line = bufferedReader.readLine();
             }
+            strings.set(strings.size() - 1, builder.toString());
 
-            result = builder.toString();
-            for (String s: result.split("\n")) {
-                writerString += "[\"%s\"],".formatted(s);
+            for (String string: strings) {
+                writerString += "\"%s\",".formatted(string);
             }
+
             writerString = writerString.substring(0, writerString.length() - 1);
-            writerString = "{\"content\": %s}".formatted(writerString);
+            writerString = "{\"content\": [%s]}".formatted(writerString);
+
             try {
                 offHandStack.setSubNbt("pages", NbtHelper.fromNbtProviderString(writerString).get("content"));
             } catch (CommandSyntaxException e) {
@@ -128,7 +140,7 @@ public class NotepadItem extends Item {
         String content;
 
         StringBuilder builder = new StringBuilder();
-        NbtList list = Objects.requireNonNull(compound).getList("pages", 9);
+        NbtList list = Objects.requireNonNull(compound).getList("pages", NbtElement.STRING_TYPE);
 
         for (NbtElement element: list) {
             builder.append(element.asString()).append("\n");

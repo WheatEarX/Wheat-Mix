@@ -15,6 +15,7 @@
   "item.wheat-mix.creative_trail_card_level_2": "Creative Mode Trail Card (Level 2)",
   "item.wheat-mix.creative_trail_card_level_3": "Creative Mode Trail Card (Level 3)",
   "item.wheat-mix.random_item": "Random Item",
+  "item.wheat-mix.notepad": "Notepad",
   "item.minecraft.lingering_potion.effect.air_breathing": "Lingering Potion of Air Breathing",
   "item.minecraft.lingering_potion.effect.health_reduction": "Lingering Potion of Health Reduction",
   "item.minecraft.lingering_potion.effect.jump_reduction": "Lingering Potion of Jumping Reduction",
@@ -44,6 +45,7 @@
   "text.wheat-mix.remote_connector_screen": "Remote Connector",
   "text.wheat-mix.do_not_move": "You Can't Move!",
   "text.wheat-mix.do_not_open": "You Can't Open Inventory Screen!",
+  "text.wheat-mix.notepad.mode": "Current Mode: %s",
   "text.wheat-mix.notepad.read": "Read",
   "text.wheat-mix.notepad.write": "Write",
   "text.wheat-mix.notepad.append": "Append",
@@ -55,5 +57,6 @@
   "text.wheat-mix.notepad.append.fail": "Fail to append the content",
   "text.wheat-mix.notepad.append.success": "Append successfully",
   "text.wheat-mix.notepad.clear.fail": "Fail to clear the file",
-  "text.wheat-mix.notepad.clear.success": "Clear successfully"
+  "text.wheat-mix.notepad.clear.success": "Clear successfully",
+  "commands.notepad.config": "Path set successfully"
 }

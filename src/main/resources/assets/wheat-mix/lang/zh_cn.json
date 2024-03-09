@@ -15,6 +15,7 @@
   "item.wheat-mix.creative_trail_card_level_2": "创造模式体验卡（等级2）",
   "item.wheat-mix.creative_trail_card_level_3": "创造模式体验卡（等级3）",
   "item.wheat-mix.random_item": "随机物品",
+  "item.wheat-mix.notepad": "记事本",
   "item.minecraft.lingering_potion.effect.air_breathing": "滞留型水上呼吸药水",
   "item.minecraft.lingering_potion.effect.health_reduction": "滞留型生命值下降药水",
   "item.minecraft.lingering_potion.effect.jump_reduction": "滞留型跳跃削减药水",
@@ -44,6 +45,7 @@
   "text.wheat-mix.remote_connector_screen": "远程桌面连接",
   "text.wheat-mix.do_not_move": "禁止移动！",
   "text.wheat-mix.do_not_open": "禁止打开物品栏！",
+  "text.wheat-mix.notepad.mode": "当前模式：%s",
   "text.wheat-mix.notepad.read": "读取",
   "text.wheat-mix.notepad.write": "写入",
   "text.wheat-mix.notepad.append": "追加",
@@ -55,5 +57,6 @@
   "text.wheat-mix.notepad.append.fail": "追加内容失败",
   "text.wheat-mix.notepad.append.success": "追加成功",
   "text.wheat-mix.notepad.clear.fail": "清除失败",
-  "text.wheat-mix.notepad.clear.success": "清除成功"
+  "text.wheat-mix.notepad.clear.success": "清除成功",
+  "commands.notepad.config": "路径设置成功"
 }
