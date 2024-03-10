@@ -37,6 +37,9 @@ public class ModEnchantments {
     public static final Enchantment RANDOM = Registry.register(Registries.ENCHANTMENT,
             new Identifier(WheatMix.MOD_ID, "random"),
             new RandomEnchantment());
+    public static final Enchantment BOUNCE = Registry.register(Registries.ENCHANTMENT,
+            new Identifier(WheatMix.MOD_ID, "bounce"),
+            new BounceEnchantment());
 
     public static void RegisterModEnchantments() {
         WheatMix.LOGGER.debug("Registering mod enchantments for" + WheatMix.MOD_ID);

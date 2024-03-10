@@ -8,6 +8,7 @@
     "EnchantmentMixin",
     "GlassBottleItemMixin",
     "LivingEntityMiscMixin",
+    "bounce.PlayerEntityMixin",
     "creative_trail_card.PlayerEntityMixin",
     "gravity_cancellation.BoatItemMixin",
     "gravity_cancellation.BowItemMixin",
