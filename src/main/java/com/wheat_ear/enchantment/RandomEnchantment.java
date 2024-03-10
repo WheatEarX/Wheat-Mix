@@ -1,12 +1,10 @@
 package com.wheat_ear.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class RandomEnchantment extends Enchantment {
+public class RandomEnchantment extends ModEnchantment {
     public RandomEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.VANISHABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, ModEnchantmentTargets.ANY_ITEM, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override

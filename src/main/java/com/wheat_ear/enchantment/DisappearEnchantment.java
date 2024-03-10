@@ -1,12 +1,10 @@
 package com.wheat_ear.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class DisappearEnchantment extends Enchantment {
+public class DisappearEnchantment extends ModEnchantment {
     public DisappearEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.VANISHABLE, EquipmentSlot.values());
+        super(Rarity.RARE, ModEnchantmentTargets.ANY_ITEM, EquipmentSlot.values());
     }
 
     @Override

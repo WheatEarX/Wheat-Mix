@@ -1,12 +1,10 @@
 package com.wheat_ear.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class CheaterEnchantment extends Enchantment {
+public class CheaterEnchantment extends ModEnchantment {
     public CheaterEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTarget.VANISHABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.VERY_RARE, ModEnchantmentTargets.CREATIVE_TRAIL_CARD, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
