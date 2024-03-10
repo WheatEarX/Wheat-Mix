@@ -55,6 +55,7 @@ public class ModItems {
                 entries.add(REMOTE_CONNECTOR);
                 entries.add(RANDOM_ITEM);
                 entries.add(RANDOM_BLOCK);
+                entries.add(NOTEPAD);
             })
             .build();
 }
