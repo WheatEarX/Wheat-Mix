@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"com.wheat_ear.WheatMix"
+		],
+		"client": [
+			"com.wheat_ear.WheatMixClient"
 		]
 	},
 	"mixins": [

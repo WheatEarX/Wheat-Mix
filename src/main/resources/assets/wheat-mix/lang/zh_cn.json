@@ -16,6 +16,9 @@
   "item.wheat-mix.creative_trail_card_level_3": "创造模式体验卡（等级3）",
   "item.wheat-mix.random_item": "随机物品",
   "item.wheat-mix.notepad": "记事本",
+  "item.wheat-mix.pea": "豌豆",
+  "item.wheat-mix.snow_pea": "冰豌豆",
+  "item.wheat-mix.pea_shooter_preview": "豌豆射手体验器",
   "item.minecraft.lingering_potion.effect.air_breathing": "滞留型水上呼吸药水",
   "item.minecraft.lingering_potion.effect.health_reduction": "滞留型生命值下降药水",
   "item.minecraft.lingering_potion.effect.jump_reduction": "滞留型跳跃削减药水",
@@ -59,5 +62,6 @@
   "text.wheat-mix.notepad.append.success": "追加成功",
   "text.wheat-mix.notepad.clear.fail": "清除失败",
   "text.wheat-mix.notepad.clear.success": "清除成功",
-  "commands.notepad.config": "路径设置成功"
+  "commands.notepad.config": "路径设置成功",
+  "key.shoot": "发射"
 }
