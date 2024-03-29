@@ -50,7 +50,7 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity {
     @SuppressWarnings("RedundantCast")
     @Unique
     private void clearLookAt() {
-        MinecraftClient client = ModUtil.getValue(ClientPlayerEntity.class, this, "client");
+        MinecraftClient client = ModUtil.getValue(ClientPlayerEntity.class, MinecraftClient.class, this, "client");
         HitResult hitResult = client.crosshairTarget;
         World world = getWorld();
         if (hitResult != null) {

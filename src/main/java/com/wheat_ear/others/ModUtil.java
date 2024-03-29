@@ -19,7 +19,7 @@ public class ModUtil {
     public static final Random random = new Random();
 
     @SuppressWarnings("unchecked")
-    public static <T> T getValue(Class<?> classType, Object object, String fieldName) {
+    public static <T> T getValue(Class<?> classType, Class<T> ignoredReturnType, Object object, String fieldName) {
         try {
             Field field = classType.getDeclaredField(fieldName);
             field.setAccessible(true);
