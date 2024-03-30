@@ -9,6 +9,7 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class CalculatorScreen extends Screen {
@@ -43,7 +44,7 @@ public class CalculatorScreen extends Screen {
         textField.visible = true;
 
         GridWidget gridWidget = new GridWidget();
-        GridWidget.Adder adder = gridWidget.createAdder(3);
+        GridWidget.Adder adder = gridWidget.createAdder(4);
 
         adder.add(textField, 4);
         addNumbers(adder);
@@ -71,49 +72,88 @@ public class CalculatorScreen extends Screen {
     private static void setNumber() {
         String s = textField.getText();
         if (inputMode == InputMode.FIRST) {
-            number1 = new BigDecimal(s);
+            if (s.isEmpty()) {
+                number1 = new BigDecimal(0);
+            }
+            else {
+                number1 = new BigDecimal(s);
+            }
         }
         else if (inputMode == InputMode.SECOND) {
-            number2 = new BigDecimal(s);
+            if (s.isEmpty()) {
+                number2 = new BigDecimal(0);
+            }
+            else {
+                number2 = new BigDecimal(s);
+            }
         }
+    }
+
+    private static void syncNumberText() {
+        String number;
+        if (number1 != null) {
+            number = number1.toString();
+        }
+        else if (number2 != null) {
+            number = number2.toString();
+        }
+        else {
+            number = "";
+        }
+        textField.setText(number);
+    }
+
+    private static void setNumberAndClear() {
+        setNumber();
         textField.setText("");
     }
 
     enum ButtonType {
         NUMBER,
-        BACKSPACE,
+        BACKSPACE("←", button -> textField.eraseCharacters(-1)),
         ADD("+", button -> {
-            setNumber();
+            setNumberAndClear();
             operator = Operator.ADD;
             inputMode = InputMode.SECOND;
         }),
         SUBTRACT("-", button -> {
-            setNumber();
+            setNumberAndClear();
             operator = Operator.SUBTRACT;
             inputMode = InputMode.SECOND;
         }),
         MULTIPLY("*", button -> {
-            setNumber();
+            setNumberAndClear();
             operator = Operator.MULTIPLY;
             inputMode = InputMode.SECOND;
         }),
         DIVIDE("/", button -> {
-            setNumber();
+            setNumberAndClear();
             operator = Operator.DIVIDE;
             inputMode = InputMode.SECOND;
         }),
-        ALL_CLEAR,
+        ALL_CLEAR("C", button -> {
+            number1 = number2 = null;
+            syncNumberText();
+        }),
         EQUALS("=", button -> {
-            setNumber();
+            setNumberAndClear();
             if (number2 != null) {
                 textField.setText(operator.method.get().toString());
                 number1 = new BigDecimal(textField.getText());
                 inputMode = InputMode.FIRST;
             }
         }),
-        POINT,
-        NEGATIVE,
-        SQUARE_ROOT;
+        POINT(".", button -> textField.write(".")),
+        NEGATIVE("⁺/₋", button -> {
+            setNumber();
+            number1 = number1.negate();
+            syncNumberText();
+        }),
+        SQUARE_ROOT("√", button -> {
+            setNumber();
+            number1 = number1.sqrt(MathContext.DECIMAL32);
+            syncNumberText();
+        });
 
         private String string;
         private ButtonWidget.PressAction action;
