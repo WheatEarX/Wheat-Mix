@@ -16,11 +16,12 @@ public class CalculatorScreen extends Screen {
     private static final Text TITLE = Text.translatable("menu.calculator");
     private static final int[] NUMBER_ORDER = {7, 8, 9, 4, 5, 6, 1, 2, 3, 0};
     private static final ButtonType[] BUTTON_ORDER = {
-            ButtonType.SQUARE_ROOT, ButtonType.ALL_CLEAR, ButtonType.BACKSPACE, ButtonType.DIVIDE,
+            ButtonType.POWER, ButtonType.POWER2, ButtonType.POWER3, ButtonType.BACKSPACE,
+            ButtonType.SQUARE_ROOT, ButtonType.ABS, ButtonType.ALL_CLEAR, ButtonType.DIVIDE,
             ButtonType.NUMBER, ButtonType.NUMBER, ButtonType.NUMBER, ButtonType.MULTIPLY,
             ButtonType.NUMBER, ButtonType.NUMBER, ButtonType.NUMBER, ButtonType.SUBTRACT,
             ButtonType.NUMBER, ButtonType.NUMBER, ButtonType.NUMBER, ButtonType.ADD,
-            ButtonType.NEGATIVE, ButtonType.NUMBER, ButtonType.POINT, ButtonType.EQUALS
+            ButtonType.NEGATE, ButtonType.NUMBER, ButtonType.POINT, ButtonType.EQUALS
     };
     private static TextFieldWidget textField;
     private static BigDecimal number1, number2;
@@ -111,26 +112,10 @@ public class CalculatorScreen extends Screen {
     enum ButtonType {
         NUMBER,
         BACKSPACE("←", button -> textField.eraseCharacters(-1)),
-        ADD("+", button -> {
-            setNumberAndClear();
-            operator = Operator.ADD;
-            inputMode = InputMode.SECOND;
-        }),
-        SUBTRACT("-", button -> {
-            setNumberAndClear();
-            operator = Operator.SUBTRACT;
-            inputMode = InputMode.SECOND;
-        }),
-        MULTIPLY("*", button -> {
-            setNumberAndClear();
-            operator = Operator.MULTIPLY;
-            inputMode = InputMode.SECOND;
-        }),
-        DIVIDE("/", button -> {
-            setNumberAndClear();
-            operator = Operator.DIVIDE;
-            inputMode = InputMode.SECOND;
-        }),
+        ADD("+", Operator.ADD),
+        SUBTRACT("-", Operator.SUBTRACT),
+        MULTIPLY("*", Operator.MULTIPLY),
+        DIVIDE("/", Operator.DIVIDE),
         ALL_CLEAR("C", button -> {
             number1 = number2 = null;
             syncNumberText();
@@ -144,24 +129,55 @@ public class CalculatorScreen extends Screen {
             }
         }),
         POINT(".", button -> textField.write(".")),
-        NEGATIVE("⁺/₋", button -> {
-            setNumber();
-            number1 = number1.negate();
-            syncNumberText();
-        }),
-        SQUARE_ROOT("√", button -> {
-            setNumber();
-            number1 = number1.sqrt(MathContext.DECIMAL32);
-            syncNumberText();
-        });
+        NEGATE("⁺/₋", Operator.NEGATE),
+        SQUARE_ROOT("√", Operator.SQUARE_ROOT),
+        POWER("xʸ", Operator.POWER),
+        POWER2("x²", Operator.POWER, new BigDecimal(2)),
+        POWER3("x³", Operator.POWER, new BigDecimal(3)),
+        ABS("|x|", Operator.ABS),
+        REVERSE;
 
         private String string;
         private ButtonWidget.PressAction action;
 
-        ButtonType() {}
+        ButtonType() {
+
+        }
+
         ButtonType(String string, ButtonWidget.PressAction action) {
             this.string = string;
             this.action = action;
+        }
+
+        ButtonType(String string, Operator operator) {
+            this.string = string;
+            if (operator.isTwoArgs) {
+                this.action = button -> {
+                    setNumberAndClear();
+                    CalculatorScreen.operator = operator;
+                    inputMode = InputMode.SECOND;
+                };
+            }
+            else {
+                this.action = button -> {
+                    setNumber();
+                    number1 = operator.method.get();
+                    syncNumberText();
+                };
+            }
+        }
+
+        ButtonType(String string, Operator operator, BigDecimal arg2) {
+            this.string = string;
+            if (!operator.isTwoArgs) {
+                this.action = button -> {
+                    setNumber();
+                    number2 = arg2;
+                    number1 = operator.method.get();
+                    number2 = null;
+                    syncNumberText();
+                };
+            }
         }
 
         public ButtonWidget getButton() {
@@ -170,15 +186,26 @@ public class CalculatorScreen extends Screen {
     }
 
     enum Operator {
-        ADD(() -> number1.add(number2)),
-        SUBTRACT(() -> number1.subtract(number2)),
-        MULTIPLY(() -> number1.multiply(number2)),
-        DIVIDE(() -> number1.divide(number2, 7, RoundingMode.HALF_EVEN));
+        ADD(() -> number1.add(number2), true),
+        SUBTRACT(() -> number1.subtract(number2), true),
+        MULTIPLY(() -> number1.multiply(number2), true),
+        DIVIDE(() -> number1.divide(number2, 7, RoundingMode.HALF_EVEN), true),
+        POWER(() -> number1.pow(number2.intValue()), true),
+        NEGATE(() -> number1.negate()),
+        SQUARE_ROOT(() -> number1.sqrt(MathContext.DECIMAL64)),
+        ABS(() -> number1.abs());
 
         public final OperateAction<BigDecimal> method;
+        public final boolean isTwoArgs;
 
         Operator(OperateAction<BigDecimal> method) {
             this.method = method;
+            this.isTwoArgs = false;
+        }
+
+        Operator(OperateAction<BigDecimal> method, boolean isTwoArgs) {
+            this.method = method;
+            this.isTwoArgs = isTwoArgs;
         }
     }
 
