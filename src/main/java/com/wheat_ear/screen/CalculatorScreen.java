@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class CalculatorScreen extends Screen {
     private static final Text TITLE = Text.translatable("menu.calculator");
@@ -74,12 +75,15 @@ public class CalculatorScreen extends Screen {
 
     private static void pressButton(ButtonType type) {
         type.getButton().onPress();
+        type.getButton().setFocused(true);
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        // client.player.sendMessage(Text.literal(Integer.toString(keyCode)));
+        Objects.requireNonNull(Objects.requireNonNull(client).player).sendMessage(Text.literal(Integer.toString(keyCode)));
+
         super.keyPressed(keyCode, scanCode, modifiers);
+
         if (keyCode >= 48 && keyCode <= 57) {   // Numbers
             String number = Integer.toString(keyCode - 48);
             ButtonWidget.builder(Text.of(number),
@@ -95,14 +99,35 @@ public class CalculatorScreen extends Screen {
                 }
             }
             case 45 -> pressButton(ButtonType.SUBTRACT);   // -
-            case 56 -> {    // *
+            case 56 -> {    // ×
                 if (Screen.hasShiftDown()) {
                     pressButton(ButtonType.MULTIPLY);
                 }
             }
-            case 47 -> pressButton(ButtonType.DIVIDE);   // /
+            case 47 -> pressButton(ButtonType.DIVIDE);   // ÷
             case 259 -> pressButton(ButtonType.BACKSPACE);  // <-
-            case 67 -> pressButton(ButtonType.ALL_CLEAR);   // AC
+            case 67 -> {
+                if (Screen.hasControlDown()) {
+                    client.keyboard.setClipboard(textField.getText());  // Copy
+                }
+                else {
+                    pressButton(ButtonType.ALL_CLEAR);  // AC
+                }
+            }
+            case 118 -> {
+                if (Screen.hasControlDown()) {
+                    textField.setText(client.keyboard.getClipboard());  // Paste
+                }
+            }
+            case 120 -> {
+                if (Screen.hasControlDown()) {
+                    client.keyboard.setClipboard(textField.getText());  // Cut
+                    textField.setText("");
+                }
+            }
+            case 261 -> pressButton(ButtonType.ALL_CLEAR);   // AC
+            case 257 -> pressButton(ButtonType.EQUALS);   // =
+            case 46 -> pressButton(ButtonType.POINT);   // .
         }
         return true;
     }
@@ -144,19 +169,15 @@ public class CalculatorScreen extends Screen {
     private static void setNumberAndClear() {
         setNumber();
         textField.setText("");
-        if (number1 != null) {
-            textField.setText(number1.toString());
-        }
     }
 
     private static void normalOperate() {
         try {
-            setNumber();
             if (number1 != null && number2 != null) {
                 textField.setText(operator.method.get().toString());
             }
         }
-        catch (NumberFormatException | ArithmeticException | NullPointerException e) {
+        catch (NumberFormatException | ArithmeticException e) {
             textField.setText("格式错误");
         }
     }
@@ -170,7 +191,7 @@ public class CalculatorScreen extends Screen {
                 inputMode = InputMode.FIRST;
             }
         }
-        catch (NumberFormatException | ArithmeticException | NullPointerException e) {
+        catch (NumberFormatException | ArithmeticException e) {
             textField.setText("格式错误");
         }
     }
@@ -209,6 +230,7 @@ public class CalculatorScreen extends Screen {
         EXP("exp", button -> textField.write("e"));
 
         private String string;
+        private ButtonWidget button;
         private ButtonWidget.PressAction action;
 
         ButtonType() {
@@ -217,14 +239,15 @@ public class CalculatorScreen extends Screen {
         ButtonType(String string, ButtonWidget.PressAction action) {
             this.string = string;
             this.action = action;
+            this.button = getInnerButton();
         }
 
         ButtonType(String string, Operator operator) {
             this.string = string;
             if (operator.isTwoArgs) {
                 this.action = button -> {
-                    normalOperate();
                     setNumberAndClear();
+                    normalOperate();
                     CalculatorScreen.operator = operator;
                     inputMode = InputMode.SECOND;
                 };
@@ -236,6 +259,7 @@ public class CalculatorScreen extends Screen {
                     syncNumberText();
                 };
             }
+            this.button = getInnerButton();
         }
 
         ButtonType(String string, Operator operator, BigDecimal arg2) {
@@ -249,15 +273,21 @@ public class CalculatorScreen extends Screen {
                     syncNumberText();
                 };
             }
+            this.button = getInnerButton();
         }
 
         ButtonType(String string, BigDecimal value) {
             this.string = string;
             this.action = button -> textField.setText(value.toString());
+            this.button = getInnerButton();
+        }
+
+        public ButtonWidget getInnerButton() {
+            return ButtonWidget.builder(Text.of(string), action).width(BUTTON_WIDTH).build();
         }
 
         public ButtonWidget getButton() {
-            return ButtonWidget.builder(Text.of(string), action).width(BUTTON_WIDTH).build();
+            return button;
         }
     }
 
