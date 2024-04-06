@@ -1,4 +1,4 @@
-package com.wheat_ear.mixin;
+package com.wheat_ear.mixin.misc;
 
 import com.wheat_ear.item.ModItems;
 import net.minecraft.entity.ItemEntity;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(GlassBottleItem.class)
-abstract class GlassBottleItemMixin extends Item {
+public abstract class GlassBottleItemMixin extends Item {
     public GlassBottleItemMixin(Settings settings) {
         super(settings);
     }
