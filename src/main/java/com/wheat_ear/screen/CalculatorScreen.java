@@ -75,22 +75,22 @@ public class CalculatorScreen extends Screen {
 
     private static void pressButton(ButtonType type) {
         type.getButton().onPress();
-        type.getButton().setFocused(true);
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        Objects.requireNonNull(Objects.requireNonNull(client).player).sendMessage(Text.literal(Integer.toString(keyCode)));
+        Objects.requireNonNull(client);
+        // Objects.requireNonNull(Objects.requireNonNull(client).player).sendMessage(Text.literal(Integer.toString(keyCode)));
 
         super.keyPressed(keyCode, scanCode, modifiers);
 
-        if (keyCode >= 48 && keyCode <= 57) {   // Numbers
+        if (keyCode >= '0' && keyCode <= '9') {   // Numbers
             String number = Integer.toString(keyCode - 48);
             ButtonWidget.builder(Text.of(number),
                     button -> textField.write(number)).build().onPress();
         }
         switch (keyCode) {
-            case 61 -> {   // + and =
+            case '=' -> {   // + and =
                 if (Screen.hasShiftDown()) {
                     pressButton(ButtonType.ADD);
                 }
@@ -98,15 +98,14 @@ public class CalculatorScreen extends Screen {
                     pressButton(ButtonType.EQUALS);
                 }
             }
-            case 45 -> pressButton(ButtonType.SUBTRACT);   // -
-            case 56 -> {    // ×
+            case '-' -> pressButton(ButtonType.SUBTRACT);   // -
+            case '*' -> {    // ×
                 if (Screen.hasShiftDown()) {
                     pressButton(ButtonType.MULTIPLY);
                 }
             }
-            case 47 -> pressButton(ButtonType.DIVIDE);   // ÷
-            case 259 -> pressButton(ButtonType.BACKSPACE);  // <-
-            case 67 -> {
+            case '/' -> pressButton(ButtonType.DIVIDE);   // ÷
+            case 'C' -> {
                 if (Screen.hasControlDown()) {
                     client.keyboard.setClipboard(textField.getText());  // Copy
                 }
@@ -114,20 +113,21 @@ public class CalculatorScreen extends Screen {
                     pressButton(ButtonType.ALL_CLEAR);  // AC
                 }
             }
-            case 118 -> {
+            case 'P' -> {
                 if (Screen.hasControlDown()) {
                     textField.setText(client.keyboard.getClipboard());  // Paste
                 }
             }
-            case 120 -> {
+            case 'X' -> {
                 if (Screen.hasControlDown()) {
                     client.keyboard.setClipboard(textField.getText());  // Cut
                     textField.setText("");
                 }
             }
+            case '.' -> pressButton(ButtonType.POINT);   // .
             case 261 -> pressButton(ButtonType.ALL_CLEAR);   // AC
+            case 259 -> pressButton(ButtonType.BACKSPACE);  // <-
             case 257 -> pressButton(ButtonType.EQUALS);   // =
-            case 46 -> pressButton(ButtonType.POINT);   // .
         }
         return true;
     }
@@ -174,11 +174,11 @@ public class CalculatorScreen extends Screen {
     private static void normalOperate() {
         try {
             if (number1 != null && number2 != null) {
-                textField.setText(operator.method.get().toString());
+                number1 = operator.method.get();
             }
         }
         catch (NumberFormatException | ArithmeticException e) {
-            textField.setText("格式错误");
+            textField.setText("Wrong!");
         }
     }
 
@@ -192,7 +192,7 @@ public class CalculatorScreen extends Screen {
             }
         }
         catch (NumberFormatException | ArithmeticException e) {
-            textField.setText("格式错误");
+            textField.setText("Wrong!");
         }
     }
 
@@ -250,6 +250,7 @@ public class CalculatorScreen extends Screen {
                     normalOperate();
                     CalculatorScreen.operator = operator;
                     inputMode = InputMode.SECOND;
+                    button.setFocused(false);
                 };
             }
             else {
@@ -257,6 +258,7 @@ public class CalculatorScreen extends Screen {
                     setNumber();
                     number1 = operator.method.get();
                     syncNumberText();
+                    button.setFocused(false);
                 };
             }
             this.button = getInnerButton();
@@ -271,6 +273,7 @@ public class CalculatorScreen extends Screen {
                     number1 = operator.method.get();
                     number2 = null;
                     syncNumberText();
+                    button.setFocused(false);
                 };
             }
             this.button = getInnerButton();
