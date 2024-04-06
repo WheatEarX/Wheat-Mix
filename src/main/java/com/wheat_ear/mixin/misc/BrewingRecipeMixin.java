@@ -1,4 +1,4 @@
-package com.wheat_ear.mixin;
+package com.wheat_ear.mixin.misc;
 
 import com.wheat_ear.item.ModItems;
 import com.wheat_ear.others.ModPotions;

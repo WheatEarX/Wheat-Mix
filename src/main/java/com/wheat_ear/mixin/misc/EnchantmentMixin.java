@@ -1,4 +1,4 @@
-package com.wheat_ear.mixin;
+package com.wheat_ear.mixin.misc;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;

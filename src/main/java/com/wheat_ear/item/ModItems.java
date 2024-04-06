@@ -45,6 +45,9 @@ public class ModItems {
     public static final Item CALCULATOR = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "calculator"),
             new CalculatorItem(new Item.Settings().maxCount(1)));
+    public static final Item NOTE_BLOCK_HELMET = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "note_block_helmet"),
+            new ArmorItem(NoteBlockArmorMaterial.INSTANCE, ArmorItem.Type.HELMET,  new Item.Settings().maxCount(1)));
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
             .displayName(Text.translatable("itemGroup.wheat-mix.weNeed"))
@@ -60,6 +63,7 @@ public class ModItems {
                 entries.add(RANDOM_BLOCK);
                 entries.add(NOTEPAD);
                 entries.add(CALCULATOR);
+                entries.add(NOTE_BLOCK_HELMET);
             })
             .build();
 }
