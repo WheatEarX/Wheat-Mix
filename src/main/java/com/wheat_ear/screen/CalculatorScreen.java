@@ -31,6 +31,7 @@ public class CalculatorScreen extends Screen {
     private static Operator operator;
     private static final GridWidget gridWidget = new GridWidget();
     private static InputMode inputMode = InputMode.FIRST;
+    private static int operateCount = 0;
 
     public CalculatorScreen(MinecraftClient client) {
         super(TITLE);
@@ -75,6 +76,13 @@ public class CalculatorScreen extends Screen {
 
     private static void pressButton(ButtonType type) {
         type.getButton().onPress();
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        number1 = number2 = null;
+        operator = null;
     }
 
     @Override
@@ -172,8 +180,9 @@ public class CalculatorScreen extends Screen {
     }
 
     private static void normalOperate() {
+        ++operateCount;
         try {
-            if (number1 != null && number2 != null) {
+            if (number1 != null && number2 != null && operateCount > 1) {
                 number1 = operator.method.get();
             }
         }
@@ -183,6 +192,7 @@ public class CalculatorScreen extends Screen {
     }
 
     private static void operate() {
+        operateCount = 0;
         try {
             setNumberAndClear();
             if (number1 != null && number2 != null) {
