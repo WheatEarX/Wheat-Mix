@@ -1,4 +1,4 @@
-package com.wheat_ear.mixin.note_block_armor;
+package com.wheat_ear.mixin.note_armor;
 
 import com.wheat_ear.item.ModItems;
 import com.wheat_ear.others.ModUtil;
@@ -7,7 +7,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,10 +33,12 @@ public abstract class LivingEntityMixin extends Entity {
         ItemStack stack = getEquippedStack(EquipmentSlot.HEAD);
         if (stack.isOf(ModItems.NOTE_HELMET)) {
             World world = getWorld();
-            if (!world.isClient) {
+            if (world instanceof ServerWorld serverWorld) {
                 Random random = new Random();
-                world.playSound(null, getBlockPos(), ModUtil.getRandomFromRegistry(Registries.SOUND_EVENT), SoundCategory.PLAYERS,
+
+                serverWorld.playSound(null, getBlockPos(), ModUtil.getRandomFromRegistry(Registries.SOUND_EVENT), SoundCategory.PLAYERS,
                         random.nextFloat(0.5F, 10.0F), random.nextFloat(0.5F, 10.0F));
+                serverWorld.spawnParticles(ParticleTypes.NOTE, getX(), getY() + 1.8F, getZ(), 0, random.nextInt(4) / 24.0F, 0.0, 0.0, 1.0);
             }
         }
     }

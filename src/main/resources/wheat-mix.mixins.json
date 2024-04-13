@@ -24,7 +24,7 @@
     "misc.EnchantmentMixin",
     "misc.GlassBottleItemMixin",
     "misc.LivingEntityMiscMixin",
-    "note_block_armor.LivingEntityMixin",
+    "note_armor.LivingEntityMixin",
     "notepad.PlayerEntityMixin",
     "random_enchantment.ItemEntityMixin",
     "random_enchantment.SpawnEggItemMixin",
