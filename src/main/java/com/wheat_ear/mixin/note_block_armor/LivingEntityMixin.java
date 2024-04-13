@@ -29,7 +29,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
         ItemStack stack = getEquippedStack(EquipmentSlot.HEAD);
-        if (stack.isOf(ModItems.NOTE_BLOCK_HELMET)) {
+        if (stack.isOf(ModItems.NOTE_HELMET)) {
             World world = getWorld();
             if (!world.isClient) {
                 Random random = new Random();

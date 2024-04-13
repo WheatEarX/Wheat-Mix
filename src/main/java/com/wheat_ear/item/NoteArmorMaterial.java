@@ -7,8 +7,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
-public class NoteBlockArmorMaterial implements ArmorMaterial {
-    public static NoteBlockArmorMaterial INSTANCE = new NoteBlockArmorMaterial();
+public class NoteArmorMaterial implements ArmorMaterial {
+    public static NoteArmorMaterial INSTANCE = new NoteArmorMaterial();
     @Override
     public int getDurability(ArmorItem.Type type) {
         return 250;

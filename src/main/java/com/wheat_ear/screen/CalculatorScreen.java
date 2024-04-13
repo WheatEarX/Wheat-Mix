@@ -81,8 +81,6 @@ public class CalculatorScreen extends Screen {
     @Override
     public void close() {
         super.close();
-        number1 = number2 = null;
-        operator = null;
     }
 
     @Override
@@ -107,7 +105,7 @@ public class CalculatorScreen extends Screen {
                 }
             }
             case '-' -> pressButton(ButtonType.SUBTRACT);   // -
-            case '*' -> {    // ×
+            case '8' -> {    // ×
                 if (Screen.hasShiftDown()) {
                     pressButton(ButtonType.MULTIPLY);
                 }
@@ -135,7 +133,6 @@ public class CalculatorScreen extends Screen {
             case '.' -> pressButton(ButtonType.POINT);   // .
             case 261 -> pressButton(ButtonType.ALL_CLEAR);   // AC
             case 259 -> pressButton(ButtonType.BACKSPACE);  // <-
-            case 257 -> pressButton(ButtonType.EQUALS);   // =
         }
         return true;
     }
