@@ -36,7 +36,7 @@ public class NoteArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return "note_block";
+        return "note";
     }
 
     @Override

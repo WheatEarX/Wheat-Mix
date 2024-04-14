@@ -37,6 +37,14 @@ public class ModUtil {
             field.set(object, value);
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
+            try {
+                Field field = classType.getField(fieldName);
+                field.setAccessible(true);
+                field.set(object, value);
+
+            } catch (NoSuchFieldException | IllegalAccessException e1) {
+                throw new RuntimeException(e1);
+            }
             throw new RuntimeException(e);
         }
     }
@@ -54,14 +62,16 @@ public class ModUtil {
     }
 
     public static int getEnchantmentLevelFromNbt(NbtCompound nbt, Enchantment enchantment) {
-        NbtList nbtList = nbt.getList("Enchantments", 10);
+        if (nbt != null) {
+            NbtList nbtList = nbt.getList("Enchantments", 10);
 
-        for (int i = 0; i < nbtList.size(); ++i) {
-            NbtCompound nbtCompound = nbtList.getCompound(i);
-            Identifier identifier = EnchantmentHelper.getIdFromNbt(nbtCompound);
+            for (int i = 0; i < nbtList.size(); ++i) {
+                NbtCompound nbtCompound = nbtList.getCompound(i);
+                Identifier identifier = EnchantmentHelper.getIdFromNbt(nbtCompound);
 
-            if (identifier != null && identifier.equals(Registries.ENCHANTMENT.getId(enchantment))) {
-                return EnchantmentHelper.getLevelFromNbt(nbtCompound);
+                if (identifier != null && identifier.equals(Registries.ENCHANTMENT.getId(enchantment))) {
+                    return EnchantmentHelper.getLevelFromNbt(nbtCompound);
+                }
             }
         }
 
