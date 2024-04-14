@@ -38,7 +38,7 @@ public abstract class LivingEntityMixin extends Entity {
 
                 serverWorld.playSound(null, getBlockPos(), ModUtil.getRandomFromRegistry(Registries.SOUND_EVENT), SoundCategory.PLAYERS,
                         random.nextFloat(0.5F, 10.0F), random.nextFloat(0.5F, 10.0F));
-                serverWorld.spawnParticles(ParticleTypes.NOTE, getX(), getY() + 1.8F, getZ(), 0, random.nextInt(4) / 24.0F, 0.0, 0.0, 1.0);
+                serverWorld.spawnParticles(ParticleTypes.NOTE, getX(), getY() + 2, getZ(), 0, random.nextInt(4) / 24.0F, 0.0, 0.0, 1.0);
             }
         }
     }

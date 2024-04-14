@@ -227,7 +227,7 @@ public class CalculatorScreen extends Screen {
         POWER3("x³", Operator.POWER, new BigDecimal(3)),
         ABS("|x|", Operator.ABS),
         REVERSE("1/x", Operator.REVERSE),
-        PI("π", new BigDecimal("3.1451926535897")),
+        PI("π", new BigDecimal("3.1415926535897")),
         E("e", new BigDecimal("2.7182818284590")),
         LOG10("log₁₀", Operator.LOG10),
         LOG("log", Operator.LOG),
