@@ -3,7 +3,6 @@
   "package": "com.wheat_ear.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "EntityArmorModifierMixin",
     "bounce.PlayerEntityMixin",
     "creative_trail_card.PlayerEntityMixin",
     "gravity_cancellation.BoatItemMixin",
@@ -30,12 +29,14 @@
     "random_enchantment.ItemEntityMixin",
     "random_enchantment.SpawnEggItemMixin",
     "water.PotionEntityMixin",
-    "water.ThrowablePotionItemMixin"
+    "water.ThrowablePotionItemMixin",
+    "zombie_breed.ZombieEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "creative_trail_card.MinecraftClientMixin"
+    "creative_trail_card.MinecraftClientMixin",
+    "skull.SkullBlockEntityRendererMixin"
   ]
 }

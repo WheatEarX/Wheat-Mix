@@ -12,9 +12,14 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Random;
 
 public class ModUtil {
+    private ModUtil() {
+
+    }
 
     public static final Random random = new Random();
 
@@ -44,6 +49,25 @@ public class ModUtil {
 
             } catch (NoSuchFieldException | IllegalAccessException e1) {
                 throw new RuntimeException(e1);
+            }
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void invokeMethod(Class<?> classType, Object object, String methodName, Class<?>[] parameterTypes, Object... arguments) {
+        try {
+            Method method = classType.getDeclaredMethod(methodName, parameterTypes);
+            method.setAccessible(true);
+            method.invoke(object, arguments);
+        }
+        catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            try {
+                Method method = classType.getMethod(methodName, parameterTypes);
+                method.setAccessible(true);
+                method.invoke(object, arguments);
+            }
+            catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e1) {
+                throw new RuntimeException(e);
             }
             throw new RuntimeException(e);
         }
