@@ -18,6 +18,7 @@
   "item.wheat-mix.notepad": "记事本",
   "item.wheat-mix.calculator": "计算器",
   "item.wheat-mix.note_helmet": "音符盒头盔",
+  "item.wheat-mix.fake_browser": "浏览器（伪）",
   "item.minecraft.lingering_potion.effect.air_breathing": "滞留型水上呼吸药水",
   "item.minecraft.lingering_potion.effect.health_reduction": "滞留型生命值下降药水",
   "item.minecraft.lingering_potion.effect.jump_reduction": "滞留型跳跃削减药水",
@@ -63,5 +64,7 @@
   "text.wheat-mix.notepad.clear.fail": "清除失败",
   "text.wheat-mix.notepad.clear.success": "清除成功",
   "commands.notepad.config": "路径设置成功",
-  "key.shoot": "发射"
+  "gui.histories": "历史记录",
+  "gui.favorites": "收藏夹",
+  "gui.collect": "收藏"
 }

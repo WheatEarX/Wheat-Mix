@@ -1,4 +1,4 @@
-package com.wheat_ear.screen;
+package com.wheat_ear.gui.screen;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;

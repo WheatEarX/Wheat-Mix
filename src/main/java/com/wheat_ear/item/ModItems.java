@@ -52,6 +52,10 @@ public class ModItems {
     public static final Item VILLAGER_HEAD = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "villager_head"),
             new VerticallyAttachableBlockItem(ModBlocks.VILLAGER_HEAD, ModBlocks.VILLAGER_WALL_HEAD, new Item.Settings().rarity(Rarity.UNCOMMON), Direction.DOWN));
+    public static final Item FAKE_BROWSER = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "fake_browser"),
+            new BrowserItem(new Item.Settings().maxCount(1)));
+
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
             .displayName(Text.translatable("itemGroup.wheat-mix.weNeed"))
@@ -68,6 +72,7 @@ public class ModItems {
                 entries.add(NOTEPAD);
                 entries.add(CALCULATOR);
                 entries.add(NOTE_HELMET);
+                entries.add(FAKE_BROWSER);
                 entries.add(VILLAGER_HEAD);
             })
             .build();

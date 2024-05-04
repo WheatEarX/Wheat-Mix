@@ -18,6 +18,7 @@
   "item.wheat-mix.notepad": "Notepad",
   "item.wheat-mix.calculator": "Calculator",
   "item.wheat-mix.note_helmet": "Note Helmet",
+  "item.wheat-mix.fake_browser": "Fake Browser",
   "item.minecraft.lingering_potion.effect.air_breathing": "Lingering Potion of Air Breathing",
   "item.minecraft.lingering_potion.effect.health_reduction": "Lingering Potion of Health Reduction",
   "item.minecraft.lingering_potion.effect.jump_reduction": "Lingering Potion of Jumping Reduction",
@@ -46,6 +47,7 @@
   "enchantment.wheat-mix.random": "\u00A7k1145141919",
   "enchantment.wheat-mix.bounce": "Bounce",
   "menu.calculator": "Calculator",
+  "menu.browser": "Browser",
   "text.wheat-mix.remote_connector_screen": "Remote Connector",
   "text.wheat-mix.do_not_move": "You Can't Move!",
   "text.wheat-mix.do_not_open": "You Can't Open Inventory Screen!",
@@ -63,5 +65,7 @@
   "text.wheat-mix.notepad.clear.fail": "Fail to clear the file",
   "text.wheat-mix.notepad.clear.success": "Clear successfully",
   "commands.notepad.config": "Path set successfully",
-  "key.shoot": "Shoot"
+  "gui.histories": "Histories",
+  "gui.favorites": "Favorites",
+  "gui.collect": "Collect"
 }

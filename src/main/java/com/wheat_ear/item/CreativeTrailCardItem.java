@@ -65,7 +65,7 @@ public class CreativeTrailCardItem extends Item {
 
         @Override
         public void run() {
-            serverPlayer.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.of("Left: " + lastTime)));
+            serverPlayer.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.literal("Left: " + lastTime)));
             --lastTime;
 
             if (lastTime <= 0) {
@@ -75,7 +75,7 @@ public class CreativeTrailCardItem extends Item {
                 lastTime = time;
                 this.cancel();
             }
-            serverPlayer.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.of("Left: " + lastTime)));
+            serverPlayer.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.literal("Left: " + lastTime)));
         }
     }
 }

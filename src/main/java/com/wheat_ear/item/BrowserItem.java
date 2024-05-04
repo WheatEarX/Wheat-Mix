@@ -1,7 +1,7 @@
 package com.wheat_ear.item;
 
 import com.wheat_ear.others.ModUtil;
-import com.wheat_ear.gui.screen.CalculatorScreen;
+import com.wheat_ear.gui.screen.BrowserScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,8 +11,13 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class CalculatorItem extends Item {
-    public CalculatorItem(Settings settings) {
+import java.util.ArrayList;
+
+public class BrowserItem extends Item {
+    private final ArrayList<String> histories = new ArrayList<>();
+    private final ArrayList<String> favorites = new ArrayList<>();
+
+    public BrowserItem(Settings settings) {
         super(settings);
     }
 
@@ -21,9 +26,17 @@ public class CalculatorItem extends Item {
         ItemStack stack = user.getStackInHand(hand);
         if (user instanceof ClientPlayerEntity clientPlayer) {
             MinecraftClient client = ModUtil.getValue(ClientPlayerEntity.class, MinecraftClient.class, clientPlayer, "client");
-            client.setScreen(new CalculatorScreen(client));
+            client.setScreen(new BrowserScreen(client, this));
             return TypedActionResult.success(stack);
         }
         return TypedActionResult.pass(stack);
+    }
+
+    public ArrayList<String> getHistories() {
+        return histories;
+    }
+
+    public ArrayList<String> getFavorites() {
+        return favorites;
     }
 }
