@@ -1,7 +1,7 @@
 package com.wheat_ear.item;
 
-import com.wheat_ear.others.ModUtil;
 import com.wheat_ear.gui.screen.BrowserScreen;
+import com.wheat_ear.others.ModUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,11 +11,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public class BrowserItem extends Item {
-    private final ArrayList<String> histories = new ArrayList<>();
-    private final ArrayList<String> favorites = new ArrayList<>();
+    private final LinkedHashSet<String> histories = new LinkedHashSet<>();
+    private final LinkedHashSet<String> favorites = new LinkedHashSet<>();
 
     public BrowserItem(Settings settings) {
         super(settings);
@@ -32,11 +32,11 @@ public class BrowserItem extends Item {
         return TypedActionResult.pass(stack);
     }
 
-    public ArrayList<String> getHistories() {
+    public LinkedHashSet<String> getHistories() {
         return histories;
     }
 
-    public ArrayList<String> getFavorites() {
+    public LinkedHashSet<String> getFavorites() {
         return favorites;
     }
 }

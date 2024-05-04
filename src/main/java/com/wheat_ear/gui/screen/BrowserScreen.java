@@ -8,11 +8,11 @@ import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public class BrowserScreen extends Screen {
     private static final Text TITLE = Text.translatable("menu.browser");
-    private static final Text YES = Text.translatable("gui.yes");
+    private static final Text DONE = Text.translatable("gui.done");
     private static final Text COLLECT = Text.translatable("gui.collect");
     private static final Text HISTORY = Text.translatable("gui.histories");
     private static final Text FAVORITES = Text.translatable("gui.favorites");
@@ -29,32 +29,37 @@ public class BrowserScreen extends Screen {
 
     @Override
     public void init() {
-        addDrawableChild(textField).setPosition(width / 2 - 80, 100);
+        addDrawableChild(textField).setPosition(width / 2 - 100, 80);
 
         addDrawableChild(ButtonWidget.builder(COLLECT, button -> {
             String str = textField.getText();
 
-            ArrayList<String> favorites = browserItem.getFavorites();
-            favorites.add(str);
-        }).dimensions(width / 2 - 80, 100, 80, 20).build());
+            if (!str.isEmpty()) {
+                LinkedHashSet<String> favorites = browserItem.getFavorites();
+                favorites.add(str);
+            }
+        }).dimensions(width / 2 - 80, 110, 80, 20).build());
 
-        addDrawableChild(ButtonWidget.builder(YES, button -> {
+        addDrawableChild(ButtonWidget.builder(DONE, button -> {
             String str = textField.getText();
-            openLink(str);
 
-            ArrayList<String> histories = browserItem.getHistories();
-            histories.add(textField.getText());
-        }).dimensions(width / 2, 100, 80, 20).build());
+            if (!str.isEmpty()) {
+                openLink(str);
+
+                LinkedHashSet<String> histories = browserItem.getHistories();
+                histories.add(textField.getText());
+            }
+        }).dimensions(width / 2, 110, 80, 20).build());
 
         addDrawableChild(ButtonWidget.builder(HISTORY, button -> {
-            ArrayList<String> histories = browserItem.getHistories();
+            LinkedHashSet<String> histories = browserItem.getHistories();
             if (client != null) {
                 client.setScreen(new BrowserHistoriesScreen(client, this, histories));
             }
         }).dimensions(width / 2 - 80, 130, 80, 20).build());
 
         addDrawableChild(ButtonWidget.builder(FAVORITES, button -> {
-            ArrayList<String> favorites = browserItem.getFavorites();
+            LinkedHashSet<String> favorites = browserItem.getFavorites();
             if (client != null) {
                 client.setScreen(new BrowserFavoritesScreen(client, this, favorites));
             }

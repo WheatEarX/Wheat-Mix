@@ -6,15 +6,15 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.text.Text;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 @SuppressWarnings({"StackOverflowIssue", "DataFlowIssue"})
 public class BrowserFavoritesScreen extends Screen {
     private static final Text TITLE = Text.translatable("gui.favorites");
-    private final ArrayList<String> favorites;
+    private final LinkedHashSet<String> favorites;
     private final Screen parent;
 
-    public BrowserFavoritesScreen(MinecraftClient client, Screen parent, ArrayList<String> favorites) {
+    public BrowserFavoritesScreen(MinecraftClient client, Screen parent, LinkedHashSet<String> favorites) {
         super(TITLE);
 
         this.favorites = favorites;
@@ -25,20 +25,23 @@ public class BrowserFavoritesScreen extends Screen {
     @Override
     public void init() {
         TextWidget titleWidget = new TextWidget(title, textRenderer);
-        titleWidget.setPosition(width / 2, 20);
+        titleWidget.setPosition(width / 2 - titleWidget.getWidth() / 2, 10);
         addDrawableChild(titleWidget);
 
         FavoritesDeletableTextWidget favoritesDeletableTextWidget;
 
-        for (int i = 0; i < favorites.size(); ++i) {
-            favoritesDeletableTextWidget = new FavoritesDeletableTextWidget(Text.literal(favorites.get(i)), client.textRenderer, i);
+        int i = 0;
+        for (String str: favorites) {
+            favoritesDeletableTextWidget = new FavoritesDeletableTextWidget(Text.literal(str), client.textRenderer);
             favoritesDeletableTextWidget.alignCenter();
-            favoritesDeletableTextWidget.setPosition(width / 2 - favoritesDeletableTextWidget.getWidth() / 2, i * 9 + 30);
+            favoritesDeletableTextWidget.setPosition(width / 2 - favoritesDeletableTextWidget.getWidth() / 2, i * 12 + 30);
             if (i % 2 == 1) {
-                favoritesDeletableTextWidget.setTextColor(7);
+                favoritesDeletableTextWidget.setTextColor(0x909090);
             }
 
             addDrawableChild(favoritesDeletableTextWidget);
+            System.out.println(i * 12 + 30);
+            ++i;
         }
     }
 
@@ -48,16 +51,13 @@ public class BrowserFavoritesScreen extends Screen {
     }
 
     private class FavoritesDeletableTextWidget extends ClickableLinkTextWidget {
-        private final int index;
-        public FavoritesDeletableTextWidget(Text message, TextRenderer textRenderer, int index) {
+        public FavoritesDeletableTextWidget(Text message, TextRenderer textRenderer) {
             super(message, textRenderer);
-
-            this.index = index;
         }
 
         @Override
-        public void rightButtonAction() {
-            favorites.remove(index);
+        public void rightButtonClick() {
+            favorites.remove(getMessage().getString());
             client.setScreen(new BrowserFavoritesScreen(client, parent, favorites));
         }
     }
