@@ -40,7 +40,6 @@ public class BrowserFavoritesScreen extends Screen {
             }
 
             addDrawableChild(favoritesDeletableTextWidget);
-            System.out.println(i * 12 + 30);
             ++i;
         }
     }
