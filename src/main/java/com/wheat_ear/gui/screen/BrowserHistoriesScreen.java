@@ -34,7 +34,7 @@ public class BrowserHistoriesScreen extends Screen {
         for (String str: histories) {
             historiesDeletableTextWidget = new HistoriesDeletableTextWidget(Text.literal(str), client.textRenderer);
             historiesDeletableTextWidget.alignCenter();
-            historiesDeletableTextWidget.setPosition(width / 2 - historiesDeletableTextWidget.getWidth() / 2, i * 9 + 40);
+            historiesDeletableTextWidget.setPosition(width / 2 - historiesDeletableTextWidget.getWidth() / 2, i * 12 + 40);
             if (i % 2 == 1) {
                 historiesDeletableTextWidget.setTextColor(0x909090);
             }
