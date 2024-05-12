@@ -68,8 +68,8 @@ public class ZombieEggEntity extends ThrownItemEntity {
                 this.getWorld().spawnEntity(zombieEntity);
             }
 
-            for (int j = 0; j < 8; ++j) {
-                this.getWorld().addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, this.getStack()), this.getX(), this.getY(), this.getZ(), (this.random.nextFloat() - 0.5) * d, (this.random.nextFloat() - 0.5) * d, (this.random.nextFloat() - 0.5) * d);
+            for (int j = 0; j < 30; ++j) {
+                getWorld().addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, this.getStack()), this.getX(), this.getY(), this.getZ(), (this.random.nextFloat() - 0.5) * d, (this.random.nextFloat() - 0.5) * d, (this.random.nextFloat() - 0.5) * d);
             }
 
             this.discard();
