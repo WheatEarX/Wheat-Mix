@@ -12,4 +12,8 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(ModEffects.RESISTANCE_REDUCTION, 6000, 2), 1.0F)
             .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0), 1.0F)
             .alwaysEdible().build();
+    public static final FoodComponent VILLAGER_MEAT = new FoodComponent.Builder()
+            .hunger(4).saturationModifier(0.4F).meat().build();
+    public static final FoodComponent COOKED_VILLAGER_MEAT = new FoodComponent.Builder()
+            .hunger(9).saturationModifier(0.9F).meat().build();
 }

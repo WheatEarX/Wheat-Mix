@@ -30,13 +30,13 @@
     "random_enchantment.SpawnEggItemMixin",
     "water.PotionEntityMixin",
     "water.ThrowablePotionItemMixin",
+    "zombie_breed.ChickenEntityMixin",
     "zombie_breed.ZombieEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "creative_trail_card.MinecraftClientMixin",
-    "skull.SkullBlockEntityRendererMixin"
+    "creative_trail_card.MinecraftClientMixin"
   ]
 }

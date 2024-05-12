@@ -1,4 +1,4 @@
-package com.wheat_ear.entity.ai.goal;
+package com.wheat_ear.entity.goal;
 
 import com.wheat_ear.others.ModUtil;
 import net.minecraft.entity.ai.TargetPredicate;

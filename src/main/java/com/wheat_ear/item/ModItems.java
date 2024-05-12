@@ -10,7 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.math.Direction;
 
 public class ModItems {
     public static final Item FISH_PUFFER = Registry.register(Registries.ITEM,
@@ -49,12 +48,18 @@ public class ModItems {
     public static final Item NOTE_HELMET = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "note_helmet"),
             new ArmorItem(NoteArmorMaterial.INSTANCE, ArmorItem.Type.HELMET,  new Item.Settings().maxCount(1)));
-    public static final Item VILLAGER_HEAD = Registry.register(Registries.ITEM,
-            new Identifier(WheatMix.MOD_ID, "villager_head"),
-            new VerticallyAttachableBlockItem(ModBlocks.VILLAGER_HEAD, ModBlocks.VILLAGER_WALL_HEAD, new Item.Settings().rarity(Rarity.UNCOMMON), Direction.DOWN));
     public static final Item FAKE_BROWSER = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "fake_browser"),
             new BrowserItem(new Item.Settings().maxCount(1)));
+    public static final Item VILLAGER_MEAT = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "villager_meat"),
+            new Item(new Item.Settings().food(ModFoodComponents.VILLAGER_MEAT)));
+    public static final Item COOKED_VILLAGER_MEAT = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "cooked_villager_meat"),
+            new Item(new Item.Settings().food(ModFoodComponents.COOKED_VILLAGER_MEAT)));
+    public static final Item ZOMBIE_EGG = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "zombie_egg"),
+            new ZombieEggItem(new Item.Settings()));
 
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
@@ -73,7 +78,9 @@ public class ModItems {
                 entries.add(CALCULATOR);
                 entries.add(NOTE_HELMET);
                 entries.add(FAKE_BROWSER);
-                entries.add(VILLAGER_HEAD);
+                entries.add(VILLAGER_MEAT);
+                entries.add(COOKED_VILLAGER_MEAT);
+                entries.add(ZOMBIE_EGG);
             })
             .build();
 }
