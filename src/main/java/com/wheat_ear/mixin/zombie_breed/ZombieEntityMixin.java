@@ -3,7 +3,6 @@ package com.wheat_ear.mixin.zombie_breed;
 import com.wheat_ear.entity.goal.ZombieMateGoal;
 import com.wheat_ear.item.ModItems;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -26,7 +25,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Iterator;
 import java.util.Random;
 
 @Mixin(ZombieEntity.class)
@@ -119,7 +117,6 @@ public abstract class ZombieEntityMixin extends HostileEntity {
         zombieEntity.setBaby(true);
 
         modifyAttributes(other, zombieEntity);
-        modifyArmors(other, zombieEntity);
 
         zombieEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
         world.spawnEntityAndPassengers(zombieEntity);
@@ -132,23 +129,6 @@ public abstract class ZombieEntityMixin extends HostileEntity {
 
         if (world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
             world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
-        }
-    }
-
-    @Unique
-    private void modifyArmors(ZombieEntity other, ZombieEntity modifier) {
-        Iterator<ItemStack> itemStacks1 = this.getArmorItems().iterator();
-        Iterator<ItemStack> itemStacks2 = other.getArmorItems().iterator();
-
-        EquipmentSlot[] equipmentSlots = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
-
-        for (int i = 0; i < 4; ++i) {
-            ItemStack itemStack1 = itemStacks1.next();
-            ItemStack itemStack2 = itemStacks2.next();
-
-            ItemStack finalStack = random.nextInt(1) == 0 ? itemStack1 : itemStack2;
-
-            modifier.equipStack(equipmentSlots[i], finalStack);
         }
     }
 
