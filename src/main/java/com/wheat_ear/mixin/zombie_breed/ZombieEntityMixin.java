@@ -191,7 +191,7 @@ public abstract class ZombieEntityMixin extends HostileEntity {
         double c = Math.max(a, b);
 
         Random random = new Random();
-        c += c * random.nextGaussian();
+        c += c * random.nextDouble();
 
         return c;
     }
