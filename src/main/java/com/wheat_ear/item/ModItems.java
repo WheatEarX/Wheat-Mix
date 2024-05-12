@@ -59,7 +59,7 @@ public class ModItems {
             new Item(new Item.Settings().food(ModFoodComponents.COOKED_VILLAGER_MEAT)));
     public static final Item ZOMBIE_EGG = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "zombie_egg"),
-            new ZombieEggItem(new Item.Settings()));
+            new ZombieEggItem(new Item.Settings().maxCount(16)));
 
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
