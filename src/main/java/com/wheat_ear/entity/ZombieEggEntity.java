@@ -56,9 +56,6 @@ public class ZombieEggEntity extends ThrownItemEntity {
             if (r < 2) {
                 i = 8;
             }
-            if (r < 1) {
-                i = 16;
-            }
 
             for (int j = 0; j < i; ++j) {
                 ZombieEntity zombieEntity = new ZombieEntity(getWorld());

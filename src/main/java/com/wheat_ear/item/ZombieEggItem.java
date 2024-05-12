@@ -21,10 +21,10 @@ public class ZombieEggItem extends Item {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            ZombieEggEntity eggEntity = new ZombieEggEntity(world, user);
-            eggEntity.setItem(itemStack);
-            eggEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(eggEntity);
+            ZombieEggEntity zombieEggEntity = new ZombieEggEntity(world, user);
+            zombieEggEntity.setItem(itemStack);
+            zombieEggEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(zombieEggEntity);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
