@@ -8,8 +8,7 @@ import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -113,6 +112,29 @@ public abstract class ZombieEntityMixin extends HostileEntity {
     @Unique
     public void breed(ServerWorld world, ZombieEntity other) {
         ZombieEntity zombieEntity = EntityType.ZOMBIE.create(world);
+
+        Class<? extends ZombieEntity> class0 = ZombieEntity.class;
+        int newType = random.nextInt(2);
+
+        if (newType == 0) {
+            class0 = ((ZombieEntity) (HostileEntity) this).getClass();
+        }
+        else if (newType == 1) {
+            class0 = other.getClass();
+        }
+
+        if (class0 == HuskEntity.class) {
+            zombieEntity = EntityType.HUSK.create(world);
+        }
+        else if (class0 == DrownedEntity.class) {
+            zombieEntity = EntityType.DROWNED.create(world);
+        }
+        else if (class0 == ZombieVillagerEntity.class) {
+            zombieEntity = EntityType.ZOMBIE_VILLAGER.create(world);
+        }
+        else if (class0 == ZombifiedPiglinEntity.class) {
+            zombieEntity = EntityType.ZOMBIFIED_PIGLIN.create(world);
+        }
 
         zombieEntity.setBaby(true);
 
