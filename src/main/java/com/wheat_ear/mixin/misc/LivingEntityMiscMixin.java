@@ -4,7 +4,10 @@ import com.wheat_ear.effect.ModEffects;
 import com.wheat_ear.enchantment.ModEnchantments;
 import com.wheat_ear.others.ModUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -13,20 +16,15 @@ import net.minecraft.entity.projectile.*;
 import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.entity.projectile.thrown.ExperienceBottleEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.EntityTypeTags;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
@@ -71,40 +69,6 @@ public abstract class LivingEntityMiscMixin extends Entity {
 
     @Shadow
     public abstract void setStackInHand(Hand hand, ItemStack stack);
-
-    @Shadow
-    protected abstract float getBaseMovementSpeedMultiplier();
-
-    @Shadow
-    protected abstract boolean shouldSwimInFluids();
-
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    @Shadow
-    public abstract boolean canWalkOnFluid(FluidState state);
-
-    @Shadow
-    public abstract float getMovementSpeed();
-
-    @Shadow
-    public abstract boolean isClimbing();
-
-    @Shadow
-    public abstract Vec3d applyFluidMovingSpeed(double gravity, boolean falling, Vec3d motion);
-
-    @Shadow
-    public abstract boolean isFallFlying();
-
-    @Shadow
-    protected abstract SoundEvent getFallSound(int distance);
-
-    @Shadow
-    public abstract Vec3d applyMovementInput(Vec3d movementInput, float slipperiness);
-
-    @Shadow
-    public abstract boolean hasNoDrag();
-
-    @Shadow
-    public abstract void updateLimbs(boolean flutter);
 
     @Inject(method = "jump", at = @At("RETURN"))
     public void jump(CallbackInfo ci) {
@@ -254,10 +218,10 @@ public abstract class LivingEntityMiscMixin extends Entity {
         }
     }
 
+    /*
     /**
      * @author Wheat_ear
      * @reason The only way to do that. Do not worry.
-     */
     @SuppressWarnings("deprecation")
     @Overwrite
     public void travel(Vec3d movementInput) {
@@ -266,9 +230,6 @@ public abstract class LivingEntityMiscMixin extends Entity {
             boolean bl = this.getVelocity().y <= 0.0;
             if (bl && this.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
                 d = 0.01;
-            }
-            if (bl && this.hasStatusEffect(ModEffects.QUICK_FALLING)) {
-                d += (this.getStatusEffect(ModEffects.QUICK_FALLING).getAmplifier() + 1) * 0.06;
             }
 
             FluidState fluidState = this.getWorld().getFluidState(this.getBlockPos());
@@ -403,4 +364,5 @@ public abstract class LivingEntityMiscMixin extends Entity {
 
         this.updateLimbs(this instanceof Flutterer);
     }
+     */
 }

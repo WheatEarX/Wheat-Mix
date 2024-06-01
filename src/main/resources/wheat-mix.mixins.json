@@ -5,6 +5,8 @@
   "mixins": [
     "bounce.PlayerEntityMixin",
     "creative_trail_card.PlayerEntityMixin",
+    "enchantment_effect.FireAspectMixin",
+    "enchantment_effect.PlayerEntityMixin",
     "gravity_cancellation.BoatItemMixin",
     "gravity_cancellation.BowItemMixin",
     "gravity_cancellation.CrossBowItemMixin",

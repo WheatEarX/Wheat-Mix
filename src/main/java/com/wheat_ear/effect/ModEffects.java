@@ -30,4 +30,11 @@ public class ModEffects {
             new ModEffect(StatusEffectCategory.BENEFICIAL, 16271230)
                     .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH,
                             "81DCE4D8-70BB-81A1-30BD-5380DE36A94C", -4.0, EntityAttributeModifier.Operation.ADDITION));
+    // Newer
+    public static final StatusEffect FIRE_ASPECT = Registry.register(Registries.STATUS_EFFECT,
+            new Identifier(WheatMix.MOD_ID, "fire_aspect"),
+            new ModEffect(StatusEffectCategory.BENEFICIAL, 0xEF6723));
+    public static final StatusEffect SHARPNESS = Registry.register(Registries.STATUS_EFFECT,
+            new Identifier(WheatMix.MOD_ID, "sharpness"),
+            new ModEffect(StatusEffectCategory.BENEFICIAL, 0x3D79B4));
 }
