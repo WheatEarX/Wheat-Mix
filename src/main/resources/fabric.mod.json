@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "wheat-mix",
-	"version": "0.10.0",
+	"version": "0.10.3",
 	"name": "Make",
 	"description": "Something made by Wheat_ear. Just for fun.",
 	"authors": [
@@ -34,5 +34,5 @@
 	"suggests": {
 		"another-mod": "*"
 	},
-	"accessWidener": "base.accesswidener"
+	"accessWidener": "wheat-mix.accesswidener"
 }

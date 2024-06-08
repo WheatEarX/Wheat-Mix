@@ -31,9 +31,11 @@ public class FlatBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        if (nbt.contains(NBT_KEY) && getWorld() != null) {
+        if (getWorld() != null) {
             blockState = NbtHelper.toBlockState(getWorld().createCommandRegistryWrapper(RegistryKeys.BLOCK), nbt.getCompound(NBT_KEY));
         }
+
+        markDirty();
     }
 
     @Nullable
