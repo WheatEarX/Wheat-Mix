@@ -1,1 +1,3 @@
 accessWidener v1 named
+accessible field net/minecraft/client/render/block/BlockRenderManager blockModelRenderer Lnet/minecraft/client/render/block/BlockModelRenderer;
+accessible method net/minecraft/client/render/block/BlockModelRenderer renderQuadsFlat (Lnet/minecraft/world/BlockRenderView;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;IIZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;Ljava/util/List;Ljava/util/BitSet;)V

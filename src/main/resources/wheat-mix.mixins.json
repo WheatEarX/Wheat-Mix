@@ -30,6 +30,7 @@
     "notepad.PlayerEntityMixin",
     "random_enchantment.ItemEntityMixin",
     "random_enchantment.SpawnEggItemMixin",
+    "two_dimension_foil.ItemEntityMixin",
     "water.PotionEntityMixin",
     "water.ThrowablePotionItemMixin",
     "zombie_breed.ChickenEntityMixin",
