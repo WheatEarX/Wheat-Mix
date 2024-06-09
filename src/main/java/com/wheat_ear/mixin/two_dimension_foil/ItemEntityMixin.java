@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,15 +29,22 @@ public abstract class ItemEntityMixin extends Entity {
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo ci) {
         if (getStack().isOf(ModItems.TWO_DIMENSIONS_FOIL)) {
-            if (isOnGround() && !getWorld().isClient) {
+            if (!getWorld().isClient) {
                 World world = getWorld();
-                BlockPos blockPos = getBlockPos().down();
-                if (!world.getBlockState(blockPos).isOf(Blocks.AIR)) {
-                    BlockState blockState = world.getBlockState(blockPos);
-                    world.setBlockState(blockPos, ModBlocks.FLAT_BLOCK.getDefaultState());
-                    FlatBlockEntity flatBlockEntity = (FlatBlockEntity) world.getBlockEntity(blockPos);
-                    if (flatBlockEntity != null) {
-                        flatBlockEntity.blockState = blockState;
+
+                BlockPos nowPos = getBlockPos();
+                Direction[] directions = Direction.values();
+
+                for (Direction direction: directions) {
+                    BlockPos blockPos = nowPos.offset(direction);
+
+                    if (!world.getBlockState(blockPos).isOf(Blocks.AIR)) {
+                        BlockState blockState = world.getBlockState(blockPos);
+                        world.setBlockState(blockPos, ModBlocks.FLAT_BLOCK.getDefaultState());
+                        FlatBlockEntity flatBlockEntity = (FlatBlockEntity) world.getBlockEntity(blockPos);
+                        if (flatBlockEntity != null) {
+                            flatBlockEntity.blockState = blockState;
+                        }
                     }
                 }
             }
