@@ -60,8 +60,8 @@ public class ModItems {
     public static final Item ZOMBIE_EGG = Registry.register(Registries.ITEM,
             new Identifier(WheatMix.MOD_ID, "zombie_egg"),
             new ZombieEggItem(new Item.Settings().maxCount(16)));
-    public static final Item TWO_DIMENSIONS_FOIL = Registry.register(Registries.ITEM,
-            new Identifier(WheatMix.MOD_ID, "two_dimensions_foil"),
+    public static final Item TWO_DIMENSION_FOIL = Registry.register(Registries.ITEM,
+            new Identifier(WheatMix.MOD_ID, "two_dimension_foil"),
             new Item(new Item.Settings().maxCount(16)));
 
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
@@ -84,7 +84,7 @@ public class ModItems {
                 entries.add(VILLAGER_MEAT);
                 entries.add(COOKED_VILLAGER_MEAT);
                 entries.add(ZOMBIE_EGG);
-                entries.add(TWO_DIMENSIONS_FOIL);
+                entries.add(TWO_DIMENSION_FOIL);
             })
             .build();
 }

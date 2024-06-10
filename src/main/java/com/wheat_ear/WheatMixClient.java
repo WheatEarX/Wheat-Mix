@@ -12,6 +12,7 @@ public class WheatMixClient implements ClientModInitializer {
 
     public void registerRenderers() {
         EntityRendererRegistry.register(ModEntityType.ZOMBIE_EGG, FlyingItemEntityRenderer::new);
+
         BlockEntityRendererFactories.register(ModBlockEntityType.FLAT_BLOCK_ENTITY, FlatBlockEntityRenderer::new);
     }
 

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class FlatBlock extends Block implements BlockEntityProvider {
 
-    private final VoxelShape FLAT_SHAPE = Block.createCuboidShape(0.0, 15.6, 0.0, 16.0, 16.0, 16.0);
+    private final VoxelShape FLAT_SHAPE = Block.createCuboidShape(0.0, 15.9, 0.0, 16.0, 16.0, 16.0);
 
     public FlatBlock(Settings settings) {
         super(settings);

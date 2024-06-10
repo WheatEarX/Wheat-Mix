@@ -11,11 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public class FlatBlockEntity extends BlockEntity {
-    public BlockState blockState = Blocks.STONE.getDefaultState();
+    public BlockState blockState;
     private static final String NBT_KEY = "BlockState";
 
     public FlatBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.FLAT_BLOCK_ENTITY, pos, state);
+        blockState = Blocks.STONE.getDefaultState();
     }
 
     @Override
@@ -23,6 +24,8 @@ public class FlatBlockEntity extends BlockEntity {
         super.writeNbt(nbt);
 
         nbt.put(NBT_KEY, NbtHelper.fromBlockState(blockState));
+        
+        markDirty();
     }
 
     @Override
