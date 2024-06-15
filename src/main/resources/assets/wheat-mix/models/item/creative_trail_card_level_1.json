@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "wheat-mix:item/creative_trail_card_level_1"
-  }
-}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "pattern": [
+    "DED",
+    "EDE",
+    "DED"
+  ],
+  "result": {
+    "count": 1,
+    "item": "wheat_mix:creative_trail_card_level_1"
+  },
+  "show_notification": true
+}

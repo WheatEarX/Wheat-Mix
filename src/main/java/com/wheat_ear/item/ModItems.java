@@ -66,7 +66,7 @@ public class ModItems {
 
     public static final ItemGroup WE_NEED = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.AIR))
-            .displayName(Text.translatable("itemGroup.wheat-mix.weNeed"))
+            .displayName(Text.translatable("itemGroup.wheat_mix.weNeed"))
             .entries((context, entries) -> {
                 entries.add(FISH_PUFFER);
                 entries.add(REDDEN_APPLE);

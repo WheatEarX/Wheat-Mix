@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "group": "iron_ingot",
+  "ingredient": {
+    "item": "wheat_mix:villager_meat"
+  },
+  "result": "wheat_mix:cooked_villager_meat"
+}

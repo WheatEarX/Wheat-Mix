@@ -12,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WheatMix implements ModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("wheat-mix");
-    public static final String MOD_ID = "wheat-mix";
+    public static final Logger LOGGER = LoggerFactory.getLogger("wheat_mix");
+    public static final String MOD_ID = "wheat_mix";
 
     private static void registerModCommands() {
         NotepadCommand.register();

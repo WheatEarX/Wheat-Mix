@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "wheat_mix:item/two_dimension_foil"
+  }
+}

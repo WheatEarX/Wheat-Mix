@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "wheat_mix:block/random_block"
+    }
+  }
+}

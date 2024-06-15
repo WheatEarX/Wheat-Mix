@@ -39,7 +39,7 @@
               "function": "minecraft:looting_enchant"
             }
           ],
-          "name": "wheat-mix:villager_meat"
+          "name": "wheat_mix:villager_meat"
         }
       ],
       "rolls": 1.0

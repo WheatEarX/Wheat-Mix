@@ -23,7 +23,7 @@ fabricApi {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/wheat-mix.accesswidener")
+	accessWidenerPath = file("src/main/resources/wheat_mix.accesswidener")
 }
 
 dependencies {

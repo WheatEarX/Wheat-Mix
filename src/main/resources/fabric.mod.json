@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "wheat-mix",
+	"id": "wheat_mix",
 	"version": "0.10.3",
 	"name": "Make",
 	"description": "Something made by Wheat_ear. Just for fun.",
@@ -12,7 +12,7 @@
 		"sources": "https://space.bilibili.com/2028901576"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/wheat-mix/icon.png",
+	"icon": "assets/wheat_mix/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -23,16 +23,16 @@
 		]
 	},
 	"mixins": [
-		"wheat-mix.mixins.json"
+		"wheat_mix.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.3",
-		"minecraft": "~1.20",
+		"minecraft": "~1.20.4",
 		"java": ">=17",
 		"fabric-api": "*"
 	},
 	"suggests": {
 		"another-mod": "*"
 	},
-	"accessWidener": "wheat-mix.accesswidener"
+	"accessWidener": "wheat_mix.accesswidener"
 }
