@@ -1,5 +1,6 @@
 package com.wheat_ear;
 
+import com.wheat_ear.block.ModBlocks;
 import com.wheat_ear.command.NotepadCommand;
 import com.wheat_ear.enchantment.ModEnchantments;
 import com.wheat_ear.entity.ModEntityType;
@@ -27,6 +28,8 @@ public class WheatMix implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ModBlocks.registerModBlocks();
+
         ModEntityType.registerModEntityTypes();
         registerModItemGroups();
         registerModCommands();

@@ -8,16 +8,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Random;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
@@ -44,10 +44,18 @@ public abstract class ItemEntityMixin extends Entity {
                         if (flatBlockEntity != null) {
                             flatBlockEntity.blockState = blockState;
                         }
-
-                        Random random = new Random();
-                        addVelocity((random.nextDouble() - 0.5) * 0.01, (random.nextDouble() - 0.5) * 0.01, (random.nextDouble() - 0.5) * 0.01);
                     }
+                }
+
+                addVelocity((random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.1);
+
+                Box box = new Box(nowPos).expand(15.0);
+
+                for (Entity entity : world.getNonSpectatingEntities(Entity.class, box)) {
+                    if (entity instanceof PlayerEntity player && player.getAbilities().creativeMode) {
+                        continue;
+                    }
+                    entity.kill();
                 }
             }
         }
